@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pixi.js Test</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/3.0.8/pixi.js"></script>
+  <script src="build/pixi-timer.js"></script>
+</head>
+<body>
+  <script>
+      var stage = new PIXI.Container();
+      var renderer = PIXI.autoDetectRenderer(600,800);
+      renderer.backgroundColor = 0xd3d3d3;
+      document.body.appendChild(renderer.view);
+      
+        
+      requestAnimationFrame(animate);
+      
+      var gridSquares = {};
+      var xPos = 100;
+      var yPos = 200;
+      var flag = true;
+      var correct = false;
+      
+      addPicture(xPos,yPos);
+      
+      for(i=1; i<=16;i++){
+          
+          if(i%2 == 0) {
+              createSquare(i);
+          } else {
+              createSquare(i);
+          }
+          xPos+=100;
+          
+          if(i % 4 == 0) {
+              yPos+=100;
+              xPos=100;
+              flag =!flag;
+          }
+          
+      }
+      
+      function createSquare(id){
+          if(flag){
+              gridSquares[id] = createBlackSquare(xPos,yPos);
+              console.log("added black square" + id);
+          } else {
+              gridSquares[id] = createWhiteSquare(xPos,yPos);
+              console.log("added white square" + id);
+          }
+          flag=!flag; 
+          gridSquares[id].on('click',clickEvent);
+      }
+      
+      function createWhiteSquare(xPos, yPos){
+          var grid1_texture = new PIXI.Texture.fromImage("whiteSquare.jpg");
+          var grid1 = new PIXI.Sprite(grid1_texture);
+          grid1.position.x = this.xPos;
+          grid1.position.y = this.yPos;
+          grid1.interactive = true;
+          /* grid1.onclick = function() {
+            var otherWindow = window.open("questionPage.html");
+          //solved = confirm("Do you want to solve this puzzle?");
+            otherWindow.onunload=function() {
+              recieveCorrectnessData();
+              if(correct) {
+                stage.removeChild(this);
+              }
+            }
+            console.log("clicked");
+          }*/
+          stage.addChild(grid1);
+          return grid1;
+      }
+
+      function createBlackSquare(xPos, yPos){
+          var grid2_texture = new PIXI.Texture.fromImage("blackSquare.jpg");
+          var grid2 = new PIXI.Sprite(grid2_texture);
+          grid2.position.x = this.xPos;
+          grid2.position.y = this.yPos;
+          grid2.interactive = true;
+          stage.addChild(grid2);
+          return grid2;
+      }
+    
+      function addPicture(xPos,yPos){
+          var picture = new PIXI.Texture.fromImage("test.jpg");
+          var pic_sprite = new PIXI.Sprite(picture);
+          pic_sprite.x = this.xPos;
+          pic_sprite.y = this.yPos;
+          stage.addChild(pic_sprite);
+      }
+      
+      function recieveCorrectnessData() {
+          correct = localStorage.getItem('correct');
+          localStorage.removeItem('correct');
+      }
+      
+      
+      //PIXI functions
+      function animate(){
+          requestAnimationFrame(animate);
+          renderer.render(stage);
+          
+      }
+      function clickEvent(){
+          var otherWindow = window.open("questionPage.html");
+          //solved = confirm("Do you want to solve this puzzle?");
+          otherWindow.onunload=function() {
+            recieveCorrectnessData();
+            if(correct) {
+                stage.removeChild(this);
+            }
+          }
+          console.log("clicked");
+      }
+      /*
+       * function buildQuestionList() {} -- uses GET on https://opentdb.com/api_config.php
+       * function transmitQuestionList() {} -- sends question list to questionPage.html
+       */
+  </script>
+</body>
+</html>
