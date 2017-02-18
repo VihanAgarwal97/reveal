@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AJAX get API</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+<script>
+    var url = "https://opentdb.com/api.php?amount=5";
+    $.ajax({
+        
+        url: url,
+        origin: "https://opentdb.com/",
+        type: 'GET',
+        dataType: 'json',
+        success: function(result) {
+            console.log(result);
+        },
+        error: function() {
+            alert("Failed");
+        },
+    });
+    
+</script>
+ 
+</body>
+</html>
