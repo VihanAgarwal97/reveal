@@ -7,7 +7,11 @@
 </head>
 <body>
 <script>
-    var url = "https://opentdb.com/api.php?amount=5";
+    
+    /*Holds all the questions*/
+    var questionBank = new Array();
+    
+    var url = "https://opentdb.com/api.php?amount=50&difficulty=easy";
     $.ajax({
         
         url: url,
@@ -15,13 +19,25 @@
         type: 'GET',
         dataType: 'json',
         success: function(result) {
-            console.log(result);
+            for(i=0;i<result.results.length;i++){
+                var thisQ=result.results[i];
+                questionBank[i] = createQuestion(thisQ.question,thisQ.correct_answer,thisQ.incorrect_answers);
+            }
         },
         error: function() {
             alert("Failed");
         },
     });
     
+    function createQuestion(question,correct,incorrect){
+        var obj=new Object();
+        obj.question = question;
+        obj.correct = correct;
+        obj.incorrect = incorrect;
+        return obj;
+    }
+    
+    console.log(questionBank);
 </script>
  
 </body>
