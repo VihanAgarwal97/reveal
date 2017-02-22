@@ -1,0 +1,10 @@
+bird.jpg$BIRD
+beer.jpg$BEER
+butterfly.jpg$BUTTERFLY
+duck.jpg$DUCK
+goat.jpg$GOAT
+mahal.jpg$TAJ MAHAL
+zucchini.jpg$ZUCCHINI
+cheese.jpg$CHEESE
+heels.jpg$HIGH HEELS
+yinyang.jpg$YIN YANG
