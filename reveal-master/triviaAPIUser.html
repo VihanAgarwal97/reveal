@@ -7,38 +7,125 @@
 </head>
 <body>
 <script>
+    var url = "https://opentdb.com/api.php?amount=5";
+    var response = new Object({responseArray: null});
     
-    /*Holds all the questions*/
-    var questionBank = new Array();
-    
-    var url = "https://opentdb.com/api.php?amount=50&difficulty=easy";
-    $.ajax({
-        
-        url: url,
-        origin: "https://opentdb.com/",
-        type: 'GET',
-        dataType: 'json',
-        success: function(result) {
-            for(i=0;i<result.results.length;i++){
-                var thisQ=result.results[i];
-                questionBank[i] = createQuestion(thisQ.question,thisQ.correct_answer,thisQ.incorrect_answers);
-            }
-        },
-        error: function() {
-            alert("Failed");
-        },
-    });
-    
-    function createQuestion(question,correct,incorrect){
-        var obj=new Object();
-        obj.question = question;
-        obj.correct = correct;
-        obj.incorrect = incorrect;
-        return obj;
+    var setResponse = function(data) {
+        response.responseArray = data;
     }
     
-    console.log(questionBank);
+    var showCorrect = function(htmlTag) {
+        document.getElementById(htmlTag).innerHTML = 
+            "Correct!";
+        console.log("Correct!");
+    }
+    var showIncorrect = function(htmlTag) {
+        document.getElementById(htmlTag).innerHTML = 
+            "Incorrect";
+    }
+    
+    var displayQA = function(htmlTag, quest) {
+        /*
+         * Displays the question (quest) on the page. The htmlTag
+         * parameter is for which text tag will contain the question.
+         */
+        
+        var correctSelector =  Math.floor(Math.random() *
+                                (quest.incorrect_answers.length + 1));
+                // correctSelector chooses which answer will be
+                // correct (0 is a, 1 b, 2 c, 3 d)
+        document.getElementById(htmlTag).innerHTML +=
+            quest.question + "<br> <br>";
+                    
+        switch(correctSelector) {
+            case 0:
+                document.getElementById(htmlTag).innerHTML += 
+                    "<button onclick='showCorrect(parentNode.id)'> a)  </button>" + quest.correct_answer 
+                    + "<br>" +
+                    "<button onclick='showIncorrect(parentNode.id)'> b) </button>" + quest.incorrect_answers[0] 
+                    + "<br>";
+                    if(quest.incorrect_answers.length > 1) {
+                        document.getElementById(htmlTag).innerHTML +=
+                      "<button onclick='showIncorrect(parentNode.id)'> c) </button>"  + quest.incorrect_answers[1] + "<br>" +
+                      "<button onclick='showIncorrect(parentNode.id)'> d) </button>"  + quest.incorrect_answers[2] + 
+                      "<br><br>";
+                    }
+                    else {
+                        document.getElementById(htmlTag).innerHTML +=
+                            "<br>";
+                    }
+                    break;
+            case 1:
+                document.getElementById(htmlTag).innerHTML += 
+                    "<button onclick='showIncorrect(parentNode.id)'> a) </button>" + quest.incorrect_answers[0] 
+                    + "<br>" +
+                    "<button onclick='showCorrect(parentNode.id)'> b)  </button>" + quest.correct_answer 
+                    + "<br>";
+                    if(quest.incorrect_answers.length > 1) {
+                      document.getElementById(htmlTag).innerHTML +=
+                      "<button onclick='showIncorrect(parentNode.id)'> c) </button>" + quest.incorrect_answers[1] 
+                          + "<br>" +
+                      "<button onclick='showIncorrect(parentNode.id)'> d) </button>" + quest.incorrect_answers[2] 
+                          + "<br><br>";
+                    }
+                    else {
+                        document.getElementById(htmlTag).innerHTML +=
+                            "<br>";
+                    }
+                    break;
+            case 2:
+                document.getElementById(htmlTag).innerHTML += 
+                    "<button onclick='showIncorrect(parentNode.id)'> a) </button>" + quest.incorrect_answers[0] 
+                    + "<br>" +
+                    "<button onclick='showIncorrect(parentNode.id)'> b) </button>" + quest.incorrect_answers[1] 
+                    + "<br>" +
+                    "<button onclick='showCorrect(parentNode.id)'> c)  </button>" + quest.correct_answer 
+                    + "<br>" +
+                    "<button onclick='showIncorrect(parentNode.id)'> d) </button>" + quest.incorrect_answers[2] 
+                    + "<br> <br>";
+                    break;
+            case 3:
+                document.getElementById(htmlTag).innerHTML += 
+                    "<button onclick='showIncorrect(parentNode.id)'> a) </button>" + quest.incorrect_answers[0] 
+                    + "<br>" +
+                    "<button onclick='showIncorrect(parentNode.id)'> b) </button>" + quest.incorrect_answers[1] 
+                    + "<br>" +
+                    "<button onclick='showIncorrect(parentNode.id)'> c) </button>" + quest.incorrect_answers[2] 
+                    + "<br>" +
+                    "<button onclick='showCorrect(parentNode.id)'> d)  </button>" + quest.correct_answer + "<br> <br>";
+                break;
+            default:
+                document.getElementById(htmlTag).innerHTML += 
+                    "Oops! Something went wrong.";
+        };
+    }
+    
+    var requestData = function(url) {
+        var dataObject;
+        $.ajax({
+
+            url: url,
+            origin: "https://opentdb.com/",
+            type: 'GET',
+            dataType: 'json',
+            
+            success: function(result) {
+                dataObject = result.results;
+                setResponse(dataObject);
+                console.log(response.responseArray);
+                var quest = response.responseArray[0];
+                displayQA('QAndA', response.responseArray[0]);
+            },
+            
+            error: function() {
+                alert("Failed");
+            },
+        });
+    }
+    requestData(url);
 </script>
+    <p id="QAndA">
+    </p>
  
 </body>
 </html>
