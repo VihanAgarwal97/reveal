@@ -11,27 +11,36 @@ var question;
 
 /*Request the API for 1 question*/
 var requestData = function(url) {
-        $.ajax({
+        dataPromise = new Promise(function(resolve, reject) {
+            $.ajax({
 
-            url: url,
-            origin: "https://opentdb.com/",
-            type: 'GET',
-            dataType: 'json',
-            
-            success: function(result) {
-                var quest = result.results[0];
-                processQuestion(quest);
-            },
-            
-            error: function() {
-                alert("Failed");
-            },
+                url: url,
+                origin: "https://opentdb.com/",
+                type: 'GET',
+                dataType: 'json',
+
+                success: function(result) {
+                    var quest = result.results[0];
+                    question = quest;
+                    resolve(question);
+                },
+
+                error: function() {
+                    alert("Failed");
+                    reject(Error("Oh no"));
+                },
+            });
+        })
+        
+        dataPromise.then(function(res) {
+            console.log(res);
         });
     }
 
 /*Processes the question and re requests API if necessary*/
 function processQuestion(quest){
-    
+    // WARNING: THIS CAN INFINITELY LOOP. Probably would look like a 
+    // DDOS
     if(questions_seen.indexOf(quest.question)<0){
         requestData(url);
     } else {
