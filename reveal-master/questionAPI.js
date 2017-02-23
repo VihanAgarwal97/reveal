@@ -13,7 +13,7 @@ var question;
 var squareNum;
 
 /*Stores all questions to be displayed on the main app*/
-var questionList = new Array();
+var questionList = {};
 
 /*Request the API*/
 var requestData = function(url, questionNum) {
@@ -40,7 +40,7 @@ var requestData = function(url, questionNum) {
         })
         
         dataPromise.then(function(res) {
-            console.log(res);
+            sessionStorage.setItem("questionList", res);
         });
     }
 
@@ -61,3 +61,5 @@ function processQuestion(quest){
 function getQuestion(){
     return question;
 }
+
+requestData(url, 30);
