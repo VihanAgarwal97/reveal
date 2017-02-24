@@ -26,16 +26,15 @@ var stage = new PIXI.Container();
 requestAnimationFrame(animate);
    
 /*Function that sets up the app*/
-function setup(){
-    
+$("document").ready(function setup(){
     var imgindex=Math.floor(Math.random() * (imginfo.length));
-    
     var thisImg=imginfo[imgindex];
     var url ="resources/" + thisImg.url;
+    console.log(questionList);
     addPicture(url);
     addSquares(no_grids);
     
-}
+});
 
 /*Adds a picture that needs to be guessed to the background*/
  function addPicture(picture){
@@ -71,8 +70,6 @@ function createGridSquare(id,xPos, yPos){
     stage.addChild(grid1);
     gridSquares[id] = grid1;
     gridSquares[id].on('mousedown',clickEvent_grid);
-//    gridSquares[id].on('mouseenter',mouseEnter_grid);
-//    gridSquares[id].on('mouseleave',mouseLeave_grid);
     gridSquares[id].mouseover = mouseEnter_grid;
     gridSquares[id].mouseout = mouseLeave_grid;
 }
@@ -101,6 +98,3 @@ function mouseLeave_grid(){
     this.texture = thisTexture;
     console.log("left");
 }
-
-//why?
-setTimeout(setup,0);

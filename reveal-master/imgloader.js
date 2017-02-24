@@ -21,6 +21,4 @@ $.get("resources/imginfo.txt", function(data) {
         var info=lines[i].split("$");
         imginfo[i]=createImage(info[0],info[1]);
     };
-    console.log(imginfo.length);
-    console.log(imginfo);
 },"text");
