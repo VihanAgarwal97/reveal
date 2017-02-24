@@ -41,14 +41,14 @@ var requestData = function(url, questionNum) {
         
         dataPromise.then(function(res) {
             console.log(res);
-            questionList = res;
+
         });
-    }
+}
 
 /*Getter for the current question*/
 function getQuestion(){
     return question;
 }
 
-requestData(url,30);
-console.log(questionList);
+requestData(url, 30);
+

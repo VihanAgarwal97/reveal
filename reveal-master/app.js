@@ -2,7 +2,9 @@
 
 /*All the grid squares currently on the page*/
 var gridSquares = {};
- 
+
+/*Stores question data about each grid square*/
+var gridSquareQuestionData = {};
 
 /*Holds the coordatinates of the top left corner of the canvas*/
 var xPos=100;
@@ -24,13 +26,12 @@ document.body.appendChild(renderer.view);
 var stage = new PIXI.Container();
 
 requestAnimationFrame(animate);
-   
+
 /*Function that sets up the app*/
 $("document").ready(function setup(){
     var imgindex=Math.floor(Math.random() * (imginfo.length));
     var thisImg=imginfo[imgindex];
     var url ="resources/" + thisImg.url;
-    console.log(questionList);
     addPicture(url);
     addSquares(no_grids);
     
@@ -51,13 +52,13 @@ function addSquares(count){
     var yPos=yPos;
     
     for(i=1; i<=count;i++){
-    createGridSquare(i,this.xPos,this.yPos);
-    this.xPos+=grid_side;
-    if(i % Math.sqrt(count) == 0) {
-        this.yPos+=grid_side;
-        this.xPos=100;
+        createGridSquare(i,this.xPos,this.yPos);
+        this.xPos+=grid_side;
+        if(i % Math.sqrt(count) == 0) {
+            this.yPos+=grid_side;
+            this.xPos=100;
+            }
         }
-    }
 }
 
 /*Creates a grid square on the screen*/
@@ -74,6 +75,11 @@ function createGridSquare(id,xPos, yPos){
     gridSquares[id].mouseout = mouseLeave_grid;
 }
 
+/*Shows the question of the clicked square*/
+function showQuestion(squareId) {
+    var squareQuestion = gridSquares[squareId].question;
+    console.log(squareQuestion);
+}
 
 /*Call to PIXI animator*/
 function animate(){
@@ -83,6 +89,7 @@ function animate(){
 
 /*Defines a function for a grid piece when mouse up*/
 function clickEvent_grid(){
+    showQuestion(this.par.id);
     stage.removeChild(this);
     console.log("removed");
 }
