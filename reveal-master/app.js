@@ -63,7 +63,7 @@ function addSquares(count){
 
 /*Creates a grid square on the screen*/
 function createGridSquare(id,xPos, yPos){
-    var grid1_texture = new PIXI.Texture.fromImage("resources/grid.png");
+    var grid1_texture = new PIXI.Texture.fromImage("resources/quizbox100.png");
     var grid1 = new PIXI.Sprite(grid1_texture);
     grid1.position.x = this.xPos;
     grid1.position.y = this.yPos;
@@ -89,7 +89,6 @@ function animate(){
 
 /*Defines a function for a grid piece when mouse up*/
 function clickEvent_grid(){
-    showQuestion(this.par.id);
     stage.removeChild(this);
     console.log("removed");
 }
@@ -98,7 +97,7 @@ var thisTexture;
 
 function mouseEnter_grid(){
     thisTexture = this.texture;
-    this.texture = new PIXI.Texture.fromImage("resources/grid_alt.png");
+    this.texture = new PIXI.Texture.fromImage("resources/selectedQuizBox100.png");
     console.log("enter");
 }
 function mouseLeave_grid(){
