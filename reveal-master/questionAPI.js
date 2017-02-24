@@ -13,7 +13,8 @@ var question;
 var squareNum;
 
 /*Stores all questions to be displayed on the main app*/
-var questionList = {};
+var questionList = new Array();
+var executed = false;
 
 /*Request the API*/
 var requestData = function(url, questionNum) {
@@ -40,14 +41,8 @@ var requestData = function(url, questionNum) {
         })
         
         dataPromise.then(function(res) {
-            console.log(res);
-
+            executed = true;
         });
-}
-
-/*Getter for the current question*/
-function getQuestion(){
-    return question;
 }
 
 requestData(url, 30);
