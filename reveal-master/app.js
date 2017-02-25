@@ -24,12 +24,25 @@ var stage = new PIXI.Container();
 
 requestAnimationFrame(animate);
 
+/*If the questionList isn't ready yet, this function will re-run*/
+var waiter = function() {
+    if(!executed) {
+        console.log("waited");
+        setTimeout(waiter, 100);
+    }
+    else {
+        console.log("ready");
+    }
+}
+
 /*Function that sets up the app*/
 $("document").ready(function setup(){
     var imgindex=Math.floor(Math.random() * (imginfo.length));
     var thisImg=imginfo[imgindex];
     var url ="resources/" + thisImg.url;
     addPicture(url);
+    waiter();
+    console.log(questionList);
     addSquares(no_grids);
     
 });
@@ -64,6 +77,7 @@ function createGridSquare(id,xPos, yPos){
     var grid1 = new PIXI.Sprite(grid1_texture);
     grid1.position.x = this.xPos;
     grid1.position.y = this.yPos;
+    grid1.question = questionList[id];
     grid1.interactive=true;
     stage.addChild(grid1);
     gridSquares[id] = grid1;
@@ -80,6 +94,7 @@ function animate(){
 
 /*Defines a function for a grid square when clicked*/
 function clickEvent_grid(){
+    console.log(this.question);
     stage.removeChild(this);
 }
 
