@@ -1,10 +1,7 @@
 /**The main code of our program lies in this file. We use jQuery and pixiJS libraries.**/
 
 /*All the grid squares currently on the page*/
-var gridSquares = {};
-
-/*Stores question data about each grid square*/
-var gridSquareQuestionData = {};
+var gridSquares = new Array();
 
 /*Holds the coordatinates of the top left corner of the canvas*/
 var xPos=100;
@@ -75,32 +72,27 @@ function createGridSquare(id,xPos, yPos){
     gridSquares[id].mouseout = mouseLeave_grid;
 }
 
-/*Shows the question of the clicked square*/
-function showQuestion(squareId) {
-    var squareQuestion = gridSquares[squareId].question;
-    console.log(squareQuestion);
-}
-
 /*Call to PIXI animator*/
 function animate(){
     requestAnimationFrame(animate);
     renderer.render(stage);   
 }
 
-/*Defines a function for a grid piece when mouse up*/
+/*Defines a function for a grid square when clicked*/
 function clickEvent_grid(){
     stage.removeChild(this);
-    console.log("removed");
 }
 
+/*Variable to store the counter as a texture*/
 var thisTexture;
 
+/*Defines a function for a grid square when the mouse enters it*/
 function mouseEnter_grid(){
     thisTexture = this.texture;
     this.texture = new PIXI.Texture.fromImage("resources/selectedQuizBox100.png");
-    console.log("enter");
 }
+
+/*Defines a function for a grid square when the mouse leaves it*/
 function mouseLeave_grid(){
     this.texture = thisTexture;
-    console.log("left");
 }
