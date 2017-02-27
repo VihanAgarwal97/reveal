@@ -1,0 +1,21 @@
+#sidePane{
+    position:absolute;
+    margin-left: 700px;
+    width:700px;
+    height:900px;
+    background: #000000;
+}
+
+#guessbox {
+    display: block;
+    margin-left:auto;
+    margin-right: auto;
+    margin-top: 100px;
+    font-size: 40px;
+    text-align: center;
+    color: red;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid;
+    border-color: red;
+}
