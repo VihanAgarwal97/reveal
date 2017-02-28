@@ -25,7 +25,7 @@ var stage = new PIXI.Container();
 requestAnimationFrame(animate);
 
 var questionAPI = new APIRequester();
-var questionListPromise = questionAPI.requestData(questionAPI.url);
+var questionListPromise = questionAPI.requestData();
 questionListPromise.then(function() {
     console.log(questionAPI.questionList);
     assignQuestions();
