@@ -24,16 +24,12 @@ var stage = new PIXI.Container();
 
 requestAnimationFrame(animate);
 
-/*If the questionList isn't ready yet, this function will re-run*/
-var waiter = function() {
-    if(!executed) {
-        console.log("waited");
-        setTimeout(waiter, 100);
-    }
-    else {
-        console.log("ready");
-    }
-}
+var questionAPI = new APIRequester();
+var questionListPromise = questionAPI.requestData(questionAPI.url);
+questionListPromise.then(function() {
+    console.log(questionAPI.questionList);
+    assignQuestions();
+});
 
 /*Function that sets up the app*/
 $("document").ready(function setup(){
@@ -41,10 +37,8 @@ $("document").ready(function setup(){
     var thisImg=imginfo[imgindex];
     var url ="resources/" + thisImg.url;
     addPicture(url);
-    waiter();
-    console.log(questionList);
     addSquares(no_grids);
-    
+    //assignQuestions();
 });
 
 /*Adds a picture that needs to be guessed to the background*/
@@ -80,13 +74,22 @@ function createGridSquare(id,localxPos, localyPos){
     var grid1 = new PIXI.Sprite(grid1_texture);
     grid1.position.x = localxPos;
     grid1.position.y = localyPos;
-    grid1.question = questionList[id];
+    //grid1.question = questionList[id];
     grid1.interactive=true;
     stage.addChild(grid1);
     gridSquares[id] = grid1;
     gridSquares[id].on('mousedown',clickEvent_grid);
     gridSquares[id].mouseover = mouseEnter_grid;
     gridSquares[id].mouseout = mouseLeave_grid;
+}
+
+/*Assigns a question to each square in the squareList*/
+function assignQuestions() {
+    var index = 0;
+    for(var square in gridSquares) {
+        square.question = questionAPI.questionList[index];
+        index++;
+    }
 }
 
 /*Call to PIXI animator*/
