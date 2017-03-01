@@ -25,20 +25,20 @@ var stage = new PIXI.Container();
 requestAnimationFrame(animate);
 
 var questionAPI = new APIRequester();
-var questionListPromise = questionAPI.requestData();
-questionListPromise.then(function() {
-    console.log(questionAPI.questionList);
-    assignQuestions();
-});
 
 /*Function that sets up the app*/
 $("document").ready(function setup(){
+    var questionListPromise = questionAPI.requestData(questionAPI.url);
     var imgindex=Math.floor(Math.random() * (imginfo.length));
     var thisImg=imginfo[imgindex];
     var url ="resources/" + thisImg.url;
     addPicture(url);
     addSquares(no_grids);
-    //assignQuestions();
+    
+    questionListPromise.then(function() {
+        console.log(questionAPI.questionList);
+        assignQuestions();
+    });
 });
 
 /*Adds a picture that needs to be guessed to the background*/
@@ -74,7 +74,6 @@ function createGridSquare(id,localxPos, localyPos){
     var grid1 = new PIXI.Sprite(grid1_texture);
     grid1.position.x = localxPos;
     grid1.position.y = localyPos;
-    //grid1.question = questionList[id];
     grid1.interactive=true;
     stage.addChild(grid1);
     gridSquares[id] = grid1;
@@ -85,11 +84,14 @@ function createGridSquare(id,localxPos, localyPos){
 
 /*Assigns a question to each square in the squareList*/
 function assignQuestions() {
-    var index = 0;
-    for(var square in gridSquares) {
-        square.question = questionAPI.questionList[index];
-        index++;
-    }
+    console.log(typeof(gridSquares[1]));
+    $.each(gridSquares, function(i, square) {
+        if(square != undefined) {
+            console.log(square);
+            console.log(i);
+            square.question = questionAPI.questionList[i];
+        }
+    });
 }
 
 /*Call to PIXI animator*/
@@ -100,8 +102,10 @@ function animate(){
 
 /*Defines a function for a grid square when clicked*/
 function clickEvent_grid(){
-    console.log(this.question);
-    stage.removeChild(this);
+    if(questionAPI.questionList.length != 0) {
+        console.log(this.question);
+        stage.removeChild(this);   
+    }
 }
 
 /*Variable to store the counter as a texture*/
