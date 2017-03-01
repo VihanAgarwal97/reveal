@@ -86,9 +86,9 @@ function assignQuestions() {
     console.log(typeof(gridSquares[1]));
     $.each(gridSquares, function(i, square) {
         if(square != undefined) {
-            console.log(square);
             console.log(i);
             square.question = questionAPI.questionList[i];
+            console.log(square.question.type);
         }
     });
 }
@@ -103,6 +103,7 @@ function animate(){
 function clickEvent_grid(){
     if(questionAPI.questionList.length != 0) {
         console.log(this.question);
+        updateQuestionPane(this)
         stage.removeChild(this);   
     }
 }

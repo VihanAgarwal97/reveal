@@ -1,3 +1,4 @@
+/*Styling for the Side Pane that holds the question and guess box*/
 #sidePane{
     position: absolute;
     margin-left: 700px;
@@ -6,6 +7,7 @@
     background: #000000;
 }
 
+/*Styling for the guess box*/
 #guessbox {
     display: block;
     margin-left:auto;
@@ -20,6 +22,7 @@
     border-color: red;
 }
 
+/*Styling for the question*/
 #questionHead{
     position: relative;
     margin-top: 20px;
@@ -31,7 +34,11 @@
     width:600px;
     height:200px;
 }
+.questionHead{
+    color:white;
+}
 
+/*Styling for the answers*/
 .answer{
     margin-left:auto;
     margin-right:auto;
