@@ -5,7 +5,7 @@ var gridSquares = new Array();
 
 /*Holds the coordatinates of the top left corner of the picture to be hidden*/
 var xPos=50;
-var yPos=100;
+var yPos=200;
 
 /*Stores the difficulty of the level or number of grid squares and a flag for the pattern*/
 var no_grids=16;
@@ -19,7 +19,7 @@ renderer.backgroundColor = 0x000000;
 document.body.appendChild(renderer.view);
  
 
-/*New PIXI Container to hold all sprites*/
+/*New PIXI Container to hold all sprites.*/
 var stage = new PIXI.Container();
 
 requestAnimationFrame(animate);
@@ -38,7 +38,6 @@ $("document").ready(function setup(){
     var url ="resources/" + thisImg.url;
     addPicture(url);
     addSquares(no_grids);
-    //assignQuestions();
 });
 
 /*Adds a picture that needs to be guessed to the background*/

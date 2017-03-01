@@ -1,5 +1,5 @@
 #sidePane{
-    position:absolute;
+    position: absolute;
     margin-left: 700px;
     width:700px;
     height:900px;
@@ -18,4 +18,27 @@
     border: none;
     border-bottom: 2px solid;
     border-color: red;
+}
+
+#questionHead{
+    position: relative;
+    margin-top: 20px;
+    margin-bottom:20px;
+    margin-left:auto;
+    margin-right:auto;
+    border: 2px solid green;
+    background: red;
+    width:600px;
+    height:200px;
+}
+
+.answer{
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:10px;
+    position: relative;
+    border: 2px solid green;
+    background: blue;
+    width:600px;
+    height:100px;
 }
