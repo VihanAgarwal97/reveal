@@ -1,3 +1,5 @@
+/*This class deals with displaying the question associated with a grid square onto the question pane*/
+
 /*Updates the Question on the side pane to reflect the question associated with the grid passed*/
 function updateQuestionPane(item) {
     var questiontext = item.question.question;
@@ -19,6 +21,7 @@ function clearPane(){
 function addQuestionToPane(questiontext, correctAnswer,incorrectAnswers,type){
     /*Stores where the correct answer should be placed. Being picked at random*/
     var correct_index=Math.floor(Math.random()*(incorrectAnswers.length+1));
+    
     //console.log(correct_index);
     if(type=="boolean"){
         $("#answer2").hide();
@@ -50,12 +53,13 @@ function addAnswer(index,answer){
 
 /*Adds the incorrect answers to the answer divs once the correct answer has been added*/
 function addIncorrectAnswers(incorrectAnswers){
+    var tempArray = incorrectAnswers.slice(0);
     $(".answer").each(function (i,item){
-        console.log(item);
-        console.log(item.firstChild);
+//        console.log(item.firstChild);
         if(!(item.firstChild===null)){
             return;
         }
-        addAnswer(i,incorrectAnswers.pop());           
+        
+        addAnswer(i,tempArray.pop());           
     });
 }

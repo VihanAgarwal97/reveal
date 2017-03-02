@@ -51,11 +51,9 @@
     height:100px;
 }
 
-.answer{
-    color:white;
-}
 
 .answerHead{
+    color:white;
     text-align: center;
     top:20px;
 }
