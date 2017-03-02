@@ -103,7 +103,7 @@ function animate(){
 function clickEvent_grid(){
     if(questionAPI.questionList.length != 0) {
         console.log(this.question);
-        updateQuestionPane(this)
+        updateQuestionPane(this);
         stage.removeChild(this);   
     }
 }

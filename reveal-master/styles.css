@@ -23,7 +23,7 @@
 }
 
 /*Styling for the question*/
-#questionHead{
+#question{
     position: relative;
     margin-top: 20px;
     margin-bottom:20px;
@@ -36,6 +36,7 @@
 }
 .questionHead{
     color:white;
+    text-align: center;
 }
 
 /*Styling for the answers*/
@@ -48,4 +49,13 @@
     background: blue;
     width:600px;
     height:100px;
+}
+
+.answer{
+    color:white;
+}
+
+.answerHead{
+    text-align: center;
+    top:20px;
 }
