@@ -1,24 +1,28 @@
 /*Handles loading a random image behind the grid*/
-
+class Imgloader {
 /*Array to store all the possible images*/
-var imginfo=new Array();
+    constructor() {
+        this.imginfo=new Array();
+        
+        /*Reads a local text file that contains info about each image, creates an image object and stores it in imginfo*/
+        var currentObj = this;
+        $.get("resources/imginfo.txt", function(data) {
 
+            var lines=data.split("\n");
 
-/*Create an image object*/
-function createImage(url, name){
-    var obj = new Object();
-    obj.url = url;
-    obj.name = name;
-    return obj;
+            for(var i=0;i<lines.length;i++){
+                var info=lines[i].split("$");
+                currentObj.imginfo[i]=
+                    currentObj.createImage(info[0],info[1]);
+            };
+        },"text");
+    }
+
+    /*Create an image object*/
+    createImage(url, name){
+        var obj = new Object();
+        obj.url = url;
+        obj.name = name;
+        return obj;
+    }
 }
-
-/*Reads a local text file that contains info about each image, creates an image object and stores it in imginfo*/
-$.get("resources/imginfo.txt", function(data) {
-    
-    var lines=data.split("\n");
-    
-    for(i=0;i<lines.length;i++){
-        var info=lines[i].split("$");
-        imginfo[i]=createImage(info[0],info[1]);
-    };
-},"text");
