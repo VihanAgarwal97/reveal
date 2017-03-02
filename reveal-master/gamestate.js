@@ -1,17 +1,10 @@
 /*This file holds the current game state*/
+class Gamestate {
 
-/*Initial points of the user*/
-var points;
-
-/*Holds the time that has elapsed*/
-var elapsedTime;
-
-/*Holds the level*/
-var level;
-
-/*Initialize a new game*/
-function setupGame(level){
-    level = this.level;
-    elapsedTime = 0;
-    points = 0;
+    constructor(numPlayers=1, level=1) {
+        this.numPlayers = numPlayers;
+        this.level = level;
+        this.elapsedTurns = 0;
+    }
+    //buildPlayerQueue() {}
 }
