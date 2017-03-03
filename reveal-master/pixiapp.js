@@ -30,7 +30,9 @@ var imageloader = new Imgloader();
 
 /*Function that sets up the app*/
 $("document").ready(function setup(){
-    var questionListPromise = questionAPI.requestData(questionAPI.url);
+    var questionListPromise = 
+        questionAPI.requestData();
+    
     imageloader.imgPromise.then(function() {
         var imgindex=Math.floor(Math.random() * 
                            (imageloader.imginfo.length));
@@ -39,6 +41,7 @@ $("document").ready(function setup(){
         addPicture(url);
         addSquares(no_grids);
     });
+    
     questionListPromise.then(function() {
         assignQuestions();
     });
@@ -86,7 +89,7 @@ function createGridSquare(id,localxPos, localyPos){
 function assignQuestions() {
     $.each(gridSquares, function(i, square) {
         if(square != undefined) {
-            square.question = questionAPI.questionList[i];
+            square.question = questionAPI.questionList.pop();
         }
     });
 }
