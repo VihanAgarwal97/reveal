@@ -8,16 +8,19 @@ class Imgloader {
         
         /*Reads a local text file that contains info about each image, creates an image object and stores it in imginfo*/
         var currentObj = this;
-        $.get("resources/imginfo.txt", function(data) {
+        this.imgPromise = new Promise(function(resolve, reject) {
+            $.get("resources/imginfo.txt", function(data) {
 
-            var lines=data.split("\n");
+                var lines=data.split("\n");
 
-            for(var i=0;i<lines.length;i++){
-                var info=lines[i].split("$");
-                currentObj.imginfo[i]=
-                    currentObj.createImage(info[0],info[1]);
-            };
-        },"text");
+                for(var i=0;i<lines.length;i++){
+                    var info=lines[i].split("$");
+                    currentObj.imginfo[i]=
+                        currentObj.createImage(info[0],info[1]);
+                };
+                resolve(currentObj.imginfo);
+            },"text");
+        });
     }
 
     /*Create an image object*/
