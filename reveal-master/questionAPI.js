@@ -24,17 +24,6 @@ class APIRequester {
         this.questionList = qList;
     }
     
-    /*Stores the URL for the API call*/
-    //var url = "https://opentdb.com/api.php";
-
-    /*Holds all the questions already seen by the user*/
-    //var questions_seen = new Array();
-
-    /*Stores all questions to be displayed on the main app*/
-    //var questionList = new Array();
-    
-    //parentObj = this;
-
     /*Request the API*/
     requestData() {
         var parentObj = this;

@@ -1,7 +1,11 @@
 /*This class deals with displaying the question associated with a grid square onto the question pane*/
 
-/*Updates the Question on the side pane to reflect the question associated with the grid passed*/
+/*Stores the currently selected grid*/
+var activeGrid;
+
+/*Updates the question on the side pane to reflect the question associated with the grid passed to it*/
 function updateQuestionPane(item) {
+    activeGrid = item;
     var questiontext = item.question.question;
     var correctAnswer = item.question.correct_answer;
     var incorrectAnswers = item.question.incorrect_answers;
@@ -11,7 +15,7 @@ function updateQuestionPane(item) {
     
 }
 
-/*Clears the current question that is being displayed on the pane*/
+/*Clears the side pane of all the answers and questions*/
 function clearPane(){
     $("#question").empty();
     $(".answer").html("");
@@ -22,7 +26,7 @@ function addQuestionToPane(questiontext, correctAnswer,incorrectAnswers,type){
     /*Stores where the correct answer should be placed. Being picked at random*/
     var correct_index=Math.floor(Math.random()*(incorrectAnswers.length+1));
     
-    //console.log(correct_index);
+    /*Multiple choice or true and false question?*/
     if(type=="boolean"){
         $("#answer2").hide();
         $("#answer3").hide();
@@ -44,7 +48,7 @@ function addQuestion(questiontext){
     $("#question").append(questionhead);
 }
 
-/*Adds an answer to the specified answer spot*/
+/*Adds an answer to the specified answer div*/
 function addAnswer(index,answer){
     var answerHead = $("<h2 class='answerHead'>"); 
     answerHead.html(answer);
@@ -55,11 +59,9 @@ function addAnswer(index,answer){
 function addIncorrectAnswers(incorrectAnswers){
     var tempArray = incorrectAnswers.slice(0);
     $(".answer").each(function (i,item){
-//        console.log(item.firstChild);
         if(!(item.firstChild===null)){
             return;
         }
-        
         addAnswer(i,tempArray.pop());           
     });
 }

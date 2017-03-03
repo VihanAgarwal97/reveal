@@ -1,7 +1,9 @@
 /*Handles loading a random image behind the grid*/
+
 class Imgloader {
-/*Array to store all the possible images*/
+/*Constructor for the imgloader class*/
     constructor() {
+        /*Array to store all the possible images*/
         this.imginfo=new Array();
         
         /*Reads a local text file that contains info about each image, creates an image object and stores it in imginfo*/

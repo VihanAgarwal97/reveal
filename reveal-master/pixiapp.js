@@ -17,15 +17,15 @@ var grid_side=150;
 var renderer = PIXI.autoDetectRenderer(700,900);
 renderer.backgroundColor = 0x000000;
 document.body.appendChild(renderer.view);
- 
-
 /*New PIXI Container to hold all sprites.*/
 var stage = new PIXI.Container();
-
 requestAnimationFrame(animate);
 
+
+/*Create a new questionAPI object*/
 var questionAPI = new APIRequester();
 
+/*Create a new ImgLoader object*/
 var imageloader = new Imgloader();
 
 /*Function that sets up the app*/
@@ -38,7 +38,6 @@ $("document").ready(function setup(){
     addPicture(url);
     addSquares(no_grids);
     questionListPromise.then(function() {
-//        console.log(questionAPI.questionList);
         assignQuestions();
     });
 });
@@ -57,15 +56,12 @@ function addSquares(count){
     var localxPos=xPos;
     var localyPos=yPos;
     
-//    console.log("local: "+localxPos)
     for(i=1; i<=count;i++){
         createGridSquare(i,localxPos,localyPos);
         localxPos+=grid_side;
-//        console.log("local: " + localxPos);
         if(i % Math.sqrt(count) == 0) {
             localyPos+=grid_side;
             localxPos = xPos;
-//            console.log("reset local: " + localxPos);
             }
         }
 }
@@ -86,12 +82,9 @@ function createGridSquare(id,localxPos, localyPos){
 
 /*Assigns a question to each square in the squareList*/
 function assignQuestions() {
-//    console.log(typeof(gridSquares[1]));
     $.each(gridSquares, function(i, square) {
         if(square != undefined) {
-//            console.log(i);
             square.question = questionAPI.questionList[i];
-//            console.log(square.question.type);
         }
     });
 }
@@ -105,9 +98,7 @@ function animate(){
 /*Defines a function for a grid square when clicked*/
 function clickEvent_grid(){
     if(questionAPI.questionList.length != 0) {
-//        console.log(this.question);
         updateQuestionPane(this);
-//        stage.removeChild(this);   
     }
 }
 
