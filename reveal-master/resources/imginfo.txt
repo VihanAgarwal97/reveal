@@ -1,10 +1,10 @@
-bird.jpg$BIRD
-beer.jpg$BEER
-butterfly.jpg$BUTTERFLY
-duck.jpg$DUCK
-goat.jpg$GOAT
-mahal.jpg$TAJ MAHAL
-zucchini.jpg$ZUCCHINI
-cheese.jpg$CHEESE
-heels.jpg$HIGH HEELS
-yinyang.jpg$YIN YANG
+bunny.jpg$BUNNY
+candles.jpg$CANDLES
+Coffee.jpg$COFFEE
+dolphins.jpg$DOLPHINS
+forks.jpg$FORKS
+fox.jpg$FOX
+panda.jpg$PANDA
+pizza.jpg$PIZZA
+rhino.jpg$RHINO
+straws.jpg$STRAWS
