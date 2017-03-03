@@ -11,7 +11,18 @@
     </head>
     <body>
         <div id="sidePane">
-            <input type="text" id="guessbox" placeholder="GUESS">
+            <button onclick = "guessButton()", id="guessbox">Guess</button>
+            
+            <script>
+                function guessButton(){
+                    var guessSent = prompt("What is the picture");
+                    if (guessSent == null){
+                        guessSent = prompt("Please type something in")
+                    }
+                }
+            </script>
+                
+               
             <div id="question"></div>
             <div id="answer0" class="answer"></div>
             <div id="answer1" class="answer"></div>
