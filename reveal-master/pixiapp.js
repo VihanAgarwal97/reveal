@@ -31,12 +31,14 @@ var imageloader = new Imgloader();
 /*Function that sets up the app*/
 $("document").ready(function setup(){
     var questionListPromise = questionAPI.requestData(questionAPI.url);
-    var imgindex=Math.floor(Math.random() * 
+    imageloader.imgPromise.then(function() {
+        var imgindex=Math.floor(Math.random() * 
                            (imageloader.imginfo.length));
-    var thisImg=imageloader.imginfo[imgindex];
-    var url ="resources/" + thisImg.url;
-    addPicture(url);
-    addSquares(no_grids);
+        var thisImg=imageloader.imginfo[imgindex];
+        var url ="resources/" + thisImg.url;
+        addPicture(url);
+        addSquares(no_grids);
+    });
     questionListPromise.then(function() {
         assignQuestions();
     });
