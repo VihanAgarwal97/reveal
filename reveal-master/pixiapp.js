@@ -12,6 +12,9 @@ var no_grids=16;
 
 /*Stores the size of each grid square*/
 var grid_side=150;
+
+/*Stores whether the user correctly guessed the picture*/
+var pictureGuessedCorrectly = false;
       
 /*Create a new PIXI renderer and and it to the DOM*/
 var renderer = PIXI.autoDetectRenderer(700,900);
@@ -30,6 +33,8 @@ var imageloader = new Imgloader();
 
 /*Function that sets up the app*/
 $("document").ready(function setup(){
+    prepareGuessbox();
+    
     var questionListPromise = 
         questionAPI.requestData();
     
@@ -37,6 +42,7 @@ $("document").ready(function setup(){
         var imgindex=Math.floor(Math.random() * 
                            (imageloader.imginfo.length));
         var thisImg=imageloader.imginfo[imgindex];
+        imageloader.currentImage = thisImg;
         var url ="resources/" + thisImg.url;
         addPicture(url);
         addSquares(no_grids);
@@ -92,6 +98,72 @@ function assignQuestions() {
             square.question = questionAPI.questionList.pop();
         }
     });
+}
+
+/*Handles the guess functionality*/
+function prepareGuessbox() {
+    $("#guessbox").click(function(event) {
+        if(!pictureGuessedCorrectly) {
+            var guessSent = prompt("What is the picture?");
+
+            if(guessSent != "" && guessSent != null) {
+                guessSent = guessSent.toLowerCase();
+                var answer = imageloader.currentImage.name.toLowerCase();
+
+                var correctString = 
+                    answer + " is correct! (+x points)";
+                var incorrectString = 
+                    guessSent + " is incorrect (-x points)";
+
+                console.log(answer); // FOR DEBUGGING PURPOSES. REMOVE
+                                     // FROM FINAL PRODUCT.
+                var correctAnswer = 
+                            guessSent.search(answer);
+                if(correctAnswer != -1) {
+                    pictureGuessedCorrectly = true;
+                    alert(correctString);
+                }
+                else {
+                    if(similar(guessSent, answer)) {
+                        var intended = 
+                            confirm("Did you mean " + answer + "?");
+                        if(intended) {
+                            alert(correctString);
+                            pictureGuessedCorrectly = true;
+                        }
+                        else {
+                            alert(incorrectString);
+                        }
+                    }
+                    else {
+                        alert(incorrectString);
+                    }
+                }
+            }
+        }
+        else {
+            alert("You have already correctly guessed the picture");
+        }
+    });
+}
+
+/*Finds out if the image guess was close enough to the correct answer. 
+*/
+function similar(guess, correctAnswer, minCharactersCorrect=3) {
+    /*minCharactersCorrect controls how many letters need to match 
+    in order to deem the guess 'close enough.'*/
+    var minimumReached = false;
+    
+    for(var i=0; i<correctAnswer.length-minCharactersCorrect+1; i++) {
+        var answerSubstring = 
+            correctAnswer.substring(i, i+minCharactersCorrect);
+        
+        if(guess.search(answerSubstring) != -1) {
+            minimumReached = true;
+            break;
+        }
+    }
+    return minimumReached;
 }
 
 /*Call to PIXI animator*/
