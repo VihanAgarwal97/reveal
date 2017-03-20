@@ -29,14 +29,15 @@
     margin-bottom:20px;
     margin-left:auto;
     margin-right:auto;
-    border: 2px solid green;
+    border: none;
     background-image: url(resources/book.png);
     width:600px;
     height:150px;
 }
 .questionHead{
-    color:white;
+    color:red;
     text-align: center;
+    padding-top: 50px;
 }
 
 /*Styling for the answers*/
@@ -45,7 +46,7 @@
     margin-right:auto;
     margin-bottom:10px;
     position: relative;
-    border: 2px solid green;
+    border: none;
     background-image: url(resources/darkBook.png);
     width:600px;
     height:100px;
@@ -53,10 +54,12 @@
 /*highlight selected answer*/
 .answer:active{
     background-image: url(resources/Selectedbook.png);
+
 }
 
 .answerHead{
     color:white;
     text-align: center;
     top:20px;
+    padding-top: 30px;
 }
