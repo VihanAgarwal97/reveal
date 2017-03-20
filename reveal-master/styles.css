@@ -30,9 +30,9 @@
     margin-left:auto;
     margin-right:auto;
     border: 2px solid green;
-    background: red;
+    background-image: url(resources/book.png);
     width:600px;
-    height:200px;
+    height:150px;
 }
 .questionHead{
     color:white;
@@ -46,11 +46,14 @@
     margin-bottom:10px;
     position: relative;
     border: 2px solid green;
-    background: blue;
+    background-image: url(resources/darkBook.png);
     width:600px;
     height:100px;
 }
-
+/*highlight selected answer*/
+.answer:active{
+    background-image: url(resources/Selectedbook.png);
+}
 
 .answerHead{
     color:white;
