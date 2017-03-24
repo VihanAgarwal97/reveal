@@ -7,12 +7,16 @@ extraQuestionsPromise.then(function() {
     console.log("Extra questions ready.");
 });
 
-/*Assign a click event to the answer options*/
 $(".answer").click(function (event) {
+   
+    
     if(event.target.className == "answerHead"){
         checkCorrect(event.target.parentElement);
+       
+    
     } else {
         checkCorrect(event.target);
+    
     }
 });
 
@@ -21,17 +25,32 @@ $(".answer").click(function (event) {
 function checkCorrect(item){
     var id=item.id;
     var answer=$("#"+id+" .answerHead").html();
-    console.log(answer);
-    
+   
     if(answer==activeGrid.question.correct_answer){
         stage.removeChild(activeGrid);
-        alert("correct!");
+        //alert to say you are correct
+        swal({
+            title: "Congratulations!!",
+            text: "You are correct!",
+            type: "success",
+            imageUrl: "resources/images.jpeg",
+            timer: 1000,
+            showConfirmButton: false
+        });
         //Clear the question pane
-        clearPane();
-        
+        clearPane();  
     }
     else {
-        alert("wrong");
+        //Alert to say you are wrong
+        swal({
+            title: "Oh no!",
+            text: "You are wrong.",
+            type: "error",
+            imageUrl: "resources/sad-dog.jpg",
+            timer: 1000,
+            showConfirmButton: false
+        });
+     
         clearPane();
         if(extraQuestions.questionList.length == 0) {
             extraQuestionsPromise = extraQuestions.requestData();
@@ -44,4 +63,5 @@ function checkCorrect(item){
             console.log(extraQuestions.questionList.length);
         }
     }
-}
+    }   
+
