@@ -34,7 +34,7 @@ function checkCorrect(item){
             text: "You are correct!",
             type: "success",
             imageUrl: "resources/images.jpeg",
-            timer: 1000,
+            timer: 1500,
             showConfirmButton: false
         });
         //Clear the question pane
@@ -47,7 +47,7 @@ function checkCorrect(item){
             text: "You are wrong.",
             type: "error",
             imageUrl: "resources/sad-dog.jpg",
-            timer: 1000,
+            timer: 1500,
             showConfirmButton: false
         });
      

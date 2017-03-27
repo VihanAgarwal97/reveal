@@ -19,7 +19,7 @@ var pictureGuessedCorrectly = false;
 /*Create a new PIXI renderer and and it to the DOM*/
 var renderer = PIXI.autoDetectRenderer(700,900);
 renderer.backgroundColor = 0x000000;
-document.body.appendChild(renderer.view);
+document.getElementById("canvas-container").appendChild(renderer.view);
 /*New PIXI Container to hold all sprites.*/
 var stage = new PIXI.Container();
 requestAnimationFrame(animate);

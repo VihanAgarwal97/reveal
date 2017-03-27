@@ -1,9 +1,22 @@
+#screen{
+    display: flex;
+}
+
+
+#canvas-container {
+    width:50%;
+    float: left;
+}   
+
+canvas {
+    width:80%;
+}
+
 /*Styling for the Side Pane that holds the question and guess box*/
 #sidePane{
-    position: absolute;
-    margin-left: 700px;
-    width:700px;
-    height:900px;
+    float: left;
+    width:50%;
+    height: auto;
     background: #000000;
 }
 
