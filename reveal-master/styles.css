@@ -1,11 +1,14 @@
+*{
+    font-family: 'Macondo', cursive;
+}
+
 #screen{
     display: flex;
 }
 
-
 #canvas-container {
     width:50%;
-    float: left;
+    height: auto;
 }   
 
 canvas {
@@ -14,9 +17,8 @@ canvas {
 
 /*Styling for the Side Pane that holds the question and guess box*/
 #sidePane{
-    float: left;
-    width:50%;
-    height: auto;
+    display: inline;
+    width: 50%;
     background: #000000;
 }
 
@@ -25,44 +27,40 @@ canvas {
     display: block;
     margin-left:auto;
     margin-right: auto;
-    margin-top: 100px;
     font-size: 40px;
     text-align: center;
     color: red;
     background: transparent;
-    border: none;
-    border-bottom: 2px solid;
-    border-color: red;
 }
 
 /*Styling for the question*/
 #question{
-    position: relative;
     margin-top: 20px;
     margin-bottom:20px;
     margin-left:auto;
     margin-right:auto;
     border: none;
+    width: 80%;
+    height: 15%;
     background-image: url(resources/book.png);
-    width:600px;
-    height:150px;
+    background-size: cover;
+
 }
 .questionHead{
     color:red;
     text-align: center;
-    padding-top: 50px;
 }
 
 /*Styling for the answers*/
 .answer{
     margin-left:auto;
     margin-right:auto;
-    margin-bottom:10px;
-    position: relative;
+    margin-bottom:20px;
     border: none;
+    width: 80%;
+    height:10%;
     background-image: url(resources/darkBook.png);
-    width:600px;
-    height:100px;
+    background-size: cover;
 }
 /*highlight selected answer*/
 .answer:active{
@@ -73,6 +71,4 @@ canvas {
 .answerHead{
     color:white;
     text-align: center;
-    top:20px;
-    padding-top: 30px;
 }

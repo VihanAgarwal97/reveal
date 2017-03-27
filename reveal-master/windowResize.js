@@ -1,4 +1,4 @@
 $(window).resize(function (){
-    h = $("canvas").attr("height");
+    h = $("canvas").css("height");
     $("#sidePane").css("height",h);
 });
