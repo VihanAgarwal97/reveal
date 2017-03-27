@@ -24,10 +24,11 @@ canvas {
 
 /*Styling for the guess box*/
 #guessbox {
+    margin-top: 1vw;
     display: block;
     margin-left:auto;
     margin-right: auto;
-    font-size: 40px;
+    font-size: 3vw;
     text-align: center;
     color: red;
     background: transparent;
@@ -35,13 +36,12 @@ canvas {
 
 /*Styling for the question*/
 #question{
-    margin-top: 20px;
-    margin-bottom:20px;
+    margin-bottom:1vw;
     margin-left:auto;
     margin-right:auto;
     border: none;
     width: 80%;
-    height: 15%;
+    height: 18%;
     background-image: url(resources/book.png);
     background-size: cover;
 
@@ -49,16 +49,17 @@ canvas {
 .questionHead{
     color:red;
     text-align: center;
+    font-size: 2vw;
 }
 
 /*Styling for the answers*/
 .answer{
     margin-left:auto;
     margin-right:auto;
-    margin-bottom:20px;
+    margin-bottom:1vw;
     border: none;
     width: 80%;
-    height:10%;
+    height:13%;
     background-image: url(resources/darkBook.png);
     background-size: cover;
 }
@@ -71,4 +72,5 @@ canvas {
 .answerHead{
     color:white;
     text-align: center;
+    font-size: 1.75vw;
 }
