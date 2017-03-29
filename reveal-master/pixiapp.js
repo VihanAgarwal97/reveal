@@ -51,6 +51,12 @@ $("document").ready(function setup(){
     questionListPromise.then(function() {
         assignQuestions();
     });
+    
+    //Handle height of side pane based on canvas every time the window is resized
+    $(window).resize(function (){
+        h = $("canvas").css("height");
+        $("#sidePane").css("height",h);
+    });
 });
 
 /*Adds a picture that needs to be guessed to the background*/
@@ -172,11 +178,19 @@ function animate(){
     renderer.render(stage);   
 }
 
+/*Has a grid been clicked?*/
+var isClicked;
+
 /*Defines a function for a grid square when clicked*/
 function clickEvent_grid(){
+    if(isClicked) {
+        activeGrid.texture = new PIXI.Texture.fromImage("resources/quizbox150.png");
+    }
     if(questionAPI.questionList.length != 0) {
         updateQuestionPane(this);
     }
+    this.texture = new PIXI.Texture.fromImage("resources/selectedQuizBox150.png");
+    isClicked = true;
 }
 
 /*Variable to store the counter as a texture*/
@@ -184,11 +198,15 @@ var thisTexture;
 
 /*Defines a function for a grid square when the mouse enters it*/
 function mouseEnter_grid(){
-    thisTexture = this.texture;
-    this.texture = new PIXI.Texture.fromImage("resources/selectedQuizBox150.png");
+    if(this!=activeGrid) {
+        thisTexture = this.texture;
+        this.texture = new PIXI.Texture.fromImage("resources/selectedQuizBox150.png");
+    }  
 }
 
 /*Defines a function for a grid square when the mouse leaves it*/
 function mouseLeave_grid(){
-    this.texture = thisTexture;
+    if(this!=activeGrid){
+        this.texture = thisTexture;
+    }
 }

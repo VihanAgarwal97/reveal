@@ -37,8 +37,6 @@ function checkCorrect(item){
             timer: 1500,
             showConfirmButton: false
         });
-        //Clear the question pane
-        clearPane();  
     }
     else {
         //Alert to say you are wrong
@@ -51,7 +49,6 @@ function checkCorrect(item){
             showConfirmButton: false
         });
      
-        clearPane();
         if(extraQuestions.questionList.length == 0) {
             extraQuestionsPromise = extraQuestions.requestData();
             extraQuestionsPromise.then(function() {
@@ -63,5 +60,9 @@ function checkCorrect(item){
             console.log(extraQuestions.questionList.length);
         }
     }
-    }   
+        clearPane();
+        activeGrid.texture = new PIXI.Texture.fromImage("resources/quizbox150.png");
+        activeGrid = null;
+        isClicked= false;
+}   
 
