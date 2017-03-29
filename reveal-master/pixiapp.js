@@ -34,6 +34,7 @@ var imageloader = new Imgloader();
 /*Function that sets up the app*/
 $("document").ready(function setup(){
     prepareGuessbox();
+    hidePaneElements();
     
     var questionListPromise = 
         questionAPI.requestData();
@@ -189,6 +190,7 @@ function clickEvent_grid(){
     if(questionAPI.questionList.length != 0) {
         updateQuestionPane(this);
     }
+    showPaneElements();
     this.texture = new PIXI.Texture.fromImage("resources/selectedQuizBox150.png");
     isClicked = true;
 }

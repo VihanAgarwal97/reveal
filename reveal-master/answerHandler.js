@@ -60,6 +60,7 @@ function checkCorrect(item){
             console.log(extraQuestions.questionList.length);
         }
     }
+        hidePaneElements();
         clearPane();
         activeGrid.texture = new PIXI.Texture.fromImage("resources/quizbox150.png");
         activeGrid = null;

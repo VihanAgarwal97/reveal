@@ -21,6 +21,20 @@ function clearPane(){
     $(".answer").html("");
 }
 
+/*Hides the side pane elements*/
+function hidePaneElements() {
+    $("#question").css("visibility", "hidden");
+    $(".answer").css("visibility", "hidden");
+}
+
+/*shows the side pane elements*/
+function showPaneElements() {
+    $("#question").css("visibility", "visible");
+    $(".answer").css("visibility", "visible");
+}
+
+
+
 /*Adds the questions and correct answers to the question pane*/
 function addQuestionToPane(questiontext, correctAnswer,incorrectAnswers,type){
     /*Stores where the correct answer should be placed. Being picked at random*/
