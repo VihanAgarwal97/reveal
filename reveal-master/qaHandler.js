@@ -111,9 +111,10 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
         this.checkCorrect = function(item){
             var id=item.id;
             var answer=$("#"+id+" .answerHead").html();
-
+            
             if(answer==this.activeGrid.question.correct_answer){
                 this.stage.removeChild(this.activeGrid);
+                
                 //alert to say you are correct
                 swal({
                     title: "Congratulations!!",
@@ -123,6 +124,10 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
                     timer: 1500,
                     showConfirmButton: false
                 });
+                
+                /*REQUIRE JS FIX NEEDED*/
+                currState.addPoints(50);
+                addPointsLabel(currState.points);
             }
             else {
                 //Alert to say you are wrong
@@ -134,7 +139,11 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
                     timer: 1500,
                     showConfirmButton: false
                 });
-
+                
+                /*REQUIRE JS FIX NEEDED*/
+                currState.addPoints(-10);
+                addPointsLabel(currState.points);
+                
                 if(this.extraQuestions.questionList.length == 0) {
                     var extraQuestionsPromise = 
                         this.extraQuestions.requestData();

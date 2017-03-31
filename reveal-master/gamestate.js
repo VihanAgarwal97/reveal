@@ -1,19 +1,17 @@
+/*REQUIRE JS FIX NEEDED*/
 /*This file holds the current game state*/
-define([], function() {
-    return {
-        Gamestate: function(numPlayers=1, level=1) {
-            this.numPlayers = numPlayers;
-            this.level = level;
-            this.elapsedTurns = 0;
+class GameState {
+    constructor() {
+        this.points = 0;
+        this.time = 0;
+        
+        this.addPoints = function(pointstoadd) {
+            this.points += pointstoadd;
+        }
+        
+        this.updateTime = function(timeinseconds) {
+            this.time += timeinseconds;
         }
     }
-});
-/*class Gamestate {
-
-    constructor(numPlayers=1, level=1) {
-        this.numPlayers = numPlayers;
-        this.level = level;
-        this.elapsedTurns = 0;
-    }
-    //buildPlayerQueue() {}
-}*/
+    
+}

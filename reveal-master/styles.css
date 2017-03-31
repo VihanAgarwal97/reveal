@@ -2,6 +2,10 @@
     font-family: 'Macondo', cursive;
 }
 
+body {
+    background: black;
+}
+
 #screen{
     display: flex;
 }

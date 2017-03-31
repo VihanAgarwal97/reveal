@@ -57,6 +57,10 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI"],
     /*Creates an object that handles questions and answers*/
     var qah = new qaHandler.QAHandler(stage);
 
+    /*REQUIRE JS FIX NEEDED*/
+    /*Create a new GameState*/
+    var currState = new GameState();
+    
     /*Function that sets up the app*/
     $("document").ready(function setup(){
         prepareGuessbox();
@@ -71,6 +75,7 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI"],
             var thisImg=imageloader.imginfo[imgindex];
             imageloader.currentImage = thisImg;
             var url ="resources/" + thisImg.url;
+            addPointsLabel(currState.points);
             addPicture(url);
             addSquares(no_grids);
         });
@@ -88,6 +93,21 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI"],
         });
     });
 
+    /*Add a points label to the top of the screen*/
+    function addPointsLabel(points) {
+        //Styling for the label
+        var labelStyle = new PIXI.TextStyle({
+            fontFamily: 'Macondo, cursive',
+            fontSize: 32,
+            fill: '#ffffff',
+        });
+        
+        var pointslabel = new PIXI.Text("Score: " + points, labelStyle);
+        pointslabel.x = 500;
+        pointslabel.y = 150;
+        stage.addChild(pointslabel);
+    }
+    
     /*Adds a picture that needs to be guessed to the background*/
      function addPicture(picture){
         var bg_texture = new PIXI.Texture.fromImage(picture);
