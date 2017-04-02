@@ -55,12 +55,11 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate"]
     /*Create a new ImgLoader object*/
     var imageloader = new imgloader.Imgloader();
     
-    /*Creates an object that handles questions and answers*/
-    var qah = new qaHandler.QAHandler(stage);
-
-    /*REQUIRE JS FIX NEEDED*/
     /*Create a new GameState*/
     var currState = new gamestate.GameState();
+    
+    /*Creates an object that handles questions and answers*/
+    var qah = new qaHandler.QAHandler(stage, currState);    
     
     /*Function that sets up the app*/
     $("document").ready(function setup(){
@@ -76,9 +75,10 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate"]
             var thisImg=imageloader.imginfo[imgindex];
             imageloader.currentImage = thisImg;
             var url ="resources/" + thisImg.url;
-            addPointsLabel(currState.points);
+            qah.addPointsLabel(currState.points,false);
             addPicture(url);
             addSquares(no_grids);
+            
         });
 
         questionListPromise.then(function() {
@@ -94,20 +94,6 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate"]
         });
     });
 
-    /*Add a points label to the top of the screen*/
-    function addPointsLabel(points) {
-        //Styling for the label
-        var labelStyle = new PIXI.TextStyle({
-            fontFamily: 'Macondo, cursive',
-            fontSize: 32,
-            fill: '#ffffff',
-        });
-        
-        var pointslabel = new PIXI.Text("Score: " + points, labelStyle);
-        pointslabel.x = 500;
-        pointslabel.y = 150;
-        stage.addChild(pointslabel);
-    }
     
     /*Adds a picture that needs to be guessed to the background*/
      function addPicture(picture){

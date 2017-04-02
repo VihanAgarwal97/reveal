@@ -1,12 +1,17 @@
 define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, PIXI, questionAPI) 
 {
     return {
-        QAHandler: function(stage) {
+        QAHandler: function(stage, gState) {
             
             /*Stores the currently selected grid*/
             this.activeGrid;
             
+            /*Stores the points label*/
+            this.pointslabel;
+            
             this.stage = stage;
+            
+            this.gamestate = gState;
 
             /*Updates the question on the side pane to reflect the question associated with the grid passed to it*/
             this.updateQuestionPane = function(item) {
@@ -85,14 +90,30 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
                     currentObj.addAnswer(i,tempArray.pop());           
                 });
             }
-        
+          /*Add a points label to the top of the screen, if one exists then it updates the current label*/
+        this.addPointsLabel = function(points, update) {
+            //If this is not an update, create a new label//
+            if(!update) {
+                //Styling for the label
+                var labelStyle = new PIXI.TextStyle({
+                    fontFamily: 'Macondo, cursive',
+                    fontSize: 32,
+                    fill: '#ffffff',
+                });
+                pointslabel = new PIXI.Text("Score: " + points, labelStyle);
+                pointslabel.x = 500;
+                pointslabel.y = 150;
+                stage.addChild(pointslabel);
+                console.log("points label added");
+            } else {
+                pointslabel.text = "Score: " + points;
+            }    
+        }
+
         
         /*Stores extra questions to be used for refreshing box questions*/
         this.extraQuestions = new questionAPI.APIRequester();
-        /*var extraQuestionsPromise = extraQuestions.requestData();
-        extraQuestionsPromise.then(function() {
-            console.log("Extra questions ready.");
-        });*/
+     
         var currentObj = this;
         $(".answer").click(function (event) {
 
@@ -126,8 +147,8 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
                 });
                 
                 /*REQUIRE JS FIX NEEDED*/
-                currState.addPoints(50);
-                addPointsLabel(currState.points);
+                this.gamestate.addPoints(50);
+                this.addPointsLabel(this.gamestate.points,true);
             }
             else {
                 //Alert to say you are wrong
@@ -141,8 +162,8 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
                 });
                 
                 /*REQUIRE JS FIX NEEDED*/
-                currState.addPoints(-10);
-                addPointsLabel(currState.points);
+                this.gamestate.addPoints(-10);
+                this.addPointsLabel(this.gamestate.points,true);
                 
                 if(this.extraQuestions.questionList.length == 0) {
                     var extraQuestionsPromise = 

@@ -1,4 +1,3 @@
-/*REQUIRE JS FIX NEEDED*/
 /*This file holds the current game state*/
 define([], function() {
     return {
@@ -8,6 +7,9 @@ define([], function() {
 
             this.addPoints = function(pointstoadd) {
                 this.points += pointstoadd;
+                if(this.points<0) {
+                    this.points = 0;
+                }
             }
 
             this.updateTime = function(timeinseconds) {
@@ -17,18 +19,3 @@ define([], function() {
     }
 });
 
-/*class GameState {
-    constructor() {
-        this.points = 0;
-        this.time = 0;
-        
-        this.addPoints = function(pointstoadd) {
-            this.points += pointstoadd;
-        }
-        
-        this.updateTime = function(timeinseconds) {
-            this.time += timeinseconds;
-        }
-    }
-    
-}*/
