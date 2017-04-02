@@ -8,11 +8,12 @@ require.config({
         PIXI: "http://pixijs.download/release/pixi.min",
         qaHandler: "qaHandler",
         sweetalert: "https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min",
+        gamestate: "gamestate",
     }
 });
 
-require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI"], 
-        function(questionAPI, imgloader, qaHandler, $, PIXI) 
+require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate"], 
+        function(questionAPI, imgloader, qaHandler, $, PIXI, gamestate) 
 {
     function loadCss() {
         var link = document.createElement("link");
