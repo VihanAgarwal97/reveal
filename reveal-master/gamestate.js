@@ -2,7 +2,7 @@
 /*This file holds the current game state*/
 define([], function() {
     return {
-        Gamestate: function() {
+        GameState: function() {
             this.points = 0;
             this.time = 0;
 

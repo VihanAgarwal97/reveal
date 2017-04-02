@@ -60,7 +60,7 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate"]
 
     /*REQUIRE JS FIX NEEDED*/
     /*Create a new GameState*/
-    var currState = new GameState();
+    var currState = new gamestate.GameState();
     
     /*Function that sets up the app*/
     $("document").ready(function setup(){
