@@ -1,8 +1,7 @@
 require.config({
     baseUrl: ".",
     paths: {
-        jquery: 
-    "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min",
+        jquery: "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min",
         questionAPI: "questionAPI",
         imgloader: "imgloader",
         PIXI: "http://pixijs.download/release/pixi.min",
@@ -63,7 +62,6 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate"]
     
     /*Function that sets up the app*/
     $("document").ready(function setup(){
-        prepareGuessbox();
         qah.hidePaneElements();
 
         var questionListPromise = 
@@ -78,7 +76,7 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate"]
             qah.addPointsLabel(currState.points,false);
             addPicture(url);
             addSquares(no_grids);
-            
+            addGuessButton();
         });
 
         questionListPromise.then(function() {
@@ -94,6 +92,16 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate"]
         });
     });
 
+    /*Adds the guess button to the pixi canvas*/
+    function addGuessButton() {
+        var but_texture = new PIXI.Texture.fromImage("resources/button.png");
+        var guessbutton = new PIXI.Sprite(but_texture);
+        guessbutton.x = 300;
+        guessbutton.y = 100;
+        guessbutton.interactive = true;
+        guessbutton.on('click',prepareGuessbox);
+        stage.addChild(guessbutton);
+    }
     
     /*Adds a picture that needs to be guessed to the background*/
      function addPicture(picture){
@@ -144,10 +152,8 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate"]
 
     /*Handles the guess functionality*/
     function prepareGuessbox() {
-        $("#guessbox").click(function(event) {
             if(!pictureGuessedCorrectly) {
                 var guessSent = prompt("What is the picture?");
-
                 if(guessSent != "" && guessSent != null) {
                     guessSent = guessSent.toLowerCase();
                     var answer = imageloader.currentImage.name.toLowerCase();
@@ -184,7 +190,6 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate"]
             else {
                 alert("You have already correctly guessed the picture");
             }
-        });
     }
 
     /*Finds out if the image guess was close enough to the correct answer. 
@@ -211,9 +216,6 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate"]
         requestAnimationFrame(animate);
         renderer.render(stage);   
     }
-
-    /*Has a grid been clicked?*/
-    //var isClicked;
 
     /*Defines a function for a grid square when clicked*/
     function clickEvent_grid(){
