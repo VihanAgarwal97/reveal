@@ -152,44 +152,49 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate"]
 
     /*Handles the guess functionality*/
     function prepareGuessbox() {
-            if(!pictureGuessedCorrectly) {
-                var guessSent = prompt("What is the picture?");
-                if(guessSent != "" && guessSent != null) {
-                    guessSent = guessSent.toLowerCase();
-                    var answer = imageloader.currentImage.name.toLowerCase();
-
-                    var correctString = 
-                        answer + " is correct! (+x points)";
-                    var incorrectString = 
-                        guessSent + " is incorrect (-x points)";
-
-                    var correctAnswer = 
-                                guessSent.search(answer);
-                    if(correctAnswer != -1) {
-                        pictureGuessedCorrectly = true;
-                        alert(correctString);
-                    }
-                    else {
-                        if(similar(guessSent, answer)) {
-                            var intended = 
-                                confirm("Did you mean " + answer + "?");
-                            if(intended) {
-                                alert(correctString);
-                                pictureGuessedCorrectly = true;
-                            }
-                            else {
-                                alert(incorrectString);
-                            }
-                        }
-                        else {
-                            alert(incorrectString);
-                        }
-                    }
-                }
+        if(!pictureGuessedCorrectly) {
+            swal({
+                  title: "Guess the picture",
+                  type: "input",
+                  showCancelButton: true,
+                  closeOnConfirm: false,
+                  animation: "slide-from-top",
+                  inputPlaceholder: "Enter your guess here..."
+                },
+                function(inputValue){
+                  if (inputValue === false) return false;
+                  if (inputValue === "") return false;
+                  guess = inputValue.toLowerCase();
+                  var answer = imageloader.currentImage.name.toLowerCase();
+                  var correctAnswer=guess.search(answer);
+                  if (correctAnswer!= -1 ) {
+                      pictureGuessedCorrectly = true;
+                      swal("Nice!", "You guessed correct!", "success");
+                  } else {
+                      if(similar(guess,answer)){
+                          swal({
+                              title: "Did you mean?",
+                              text: answer,
+                              type: "warning",
+                              showCancelButton: true,
+                              confirmButtonColor: "#DD6B55",
+                              confirmButtonText: "Yes!",
+                              closeOnConfirm: false
+                            },
+                            function(){
+                              pictureGuessedCorrectly=true;
+                              swal("Nice!", "You guessed correct!", "success");
+                            });
+                          
+                      } else {
+                            swal("Oops!","You guessed wrong!","error");
+                      }
+                  }
+                });
+            } else {
+                swal("Oops", "You have already guessed the picture","error");
             }
-            else {
-                alert("You have already correctly guessed the picture");
-            }
+              
     }
 
     /*Finds out if the image guess was close enough to the correct answer. 
