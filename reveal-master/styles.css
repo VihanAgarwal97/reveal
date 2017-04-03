@@ -35,7 +35,7 @@ canvas {
     border: none;
     width: 80%;
     height: 18%;
-    background-image: url(resources/book.png);
+    background: "black"
     background-size: cover;
 
 }
@@ -52,13 +52,13 @@ canvas {
     margin-bottom:1vw;
     border: none;
     width: 80%;
-    height:13%;
-    background-image: url(resources/darkBook.png);
+    height:50%;
+    background-image: url(resources/answerbook.png);
     background-size: cover;
 }
 /*highlight selected answer*/
 .answer:active{
-    background-image: url(resources/Selectedbook.png);
+    background-image: url(resources/selectedAnswerbook.png);
 
 }
 

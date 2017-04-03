@@ -8,6 +8,7 @@ require.config({
         qaHandler: "qaHandler",
         sweetalert: "https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min",
         gamestate: "gamestate",
+        //timer: "timerReveal",
     }
 });
 
@@ -29,7 +30,7 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate"]
     /*Holds the coordatinates of the top left corner of the picture to be hidden*/
     var xPos=50;
     var yPos=200;
-
+    
     /*Stores the difficulty of the level or number of grid squares and a flag for the pattern*/
     var no_grids=16;
 
@@ -58,14 +59,16 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate"]
     var currState = new gamestate.GameState();
     
     /*Creates an object that handles questions and answers*/
-    var qah = new qaHandler.QAHandler(stage, currState);    
+    var qah = new qaHandler.QAHandler(stage, currState); 
     
     /*Function that sets up the app*/
     $("document").ready(function setup(){
+        
         qah.hidePaneElements();
 
         var questionListPromise = 
             questionAPI.requestData();
+        
 
         imageloader.imgPromise.then(function() {
             var imgindex=Math.floor(Math.random() * 
@@ -77,6 +80,7 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate"]
             addPicture(url);
             addSquares(no_grids);
             addGuessButton();
+            
         });
 
         questionListPromise.then(function() {
@@ -94,10 +98,10 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate"]
 
     /*Adds the guess button to the pixi canvas*/
     function addGuessButton() {
-        var but_texture = new PIXI.Texture.fromImage("resources/button.png");
+        var but_texture = new PIXI.Texture.fromImage("resources/guessbutton.png");
         var guessbutton = new PIXI.Sprite(but_texture);
         guessbutton.x = 300;
-        guessbutton.y = 100;
+        guessbutton.y = 50;
         guessbutton.interactive = true;
         guessbutton.on('click',prepareGuessbox);
         stage.addChild(guessbutton);
@@ -215,11 +219,51 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate"]
         }
         return minimumReached;
     }
+      var timerText = new PIXI.Text('0', {font: '36px', fill: '#FF0000', align: 'center', stroke: '#ffffff', strokeThickness: 7 });
+
+    timerText.position.x = 100;
+    timerText.position.y = 150;
+    timerText.anchor.x = 0.5;
+    stage.addChild(timerText);
+    var secs = 0;
+    var sec =0;
+    var minute = 0;
+    
+    var min =0;
+    var time;
+    function stopwatch(){
+    setTimeout(updateTimeSections(),1000);
+    }
+    function updateTimeSections(){
+        secs = secs +1;
+
+        if (sec<10){
+            sec = "0" + secs;
+        }
+        else{
+            sec = secs
+        }
+       if (secs == 59){
+           secs = 0; 
+           min++;
+       }
+        if (min<10){
+            minute = "0" + min; 
+            
+        }
+        else{
+            minute = min;   
+        }
+    }
+    requestAnimationFrame(animate);
 
     /*Call to PIXI animator*/
     function animate(){
+        
+        renderer.render(stage);
+        stopwatch();
+        timerText.text =  minute + " : "+ sec;
         requestAnimationFrame(animate);
-        renderer.render(stage);   
     }
 
     /*Defines a function for a grid square when clicked*/
