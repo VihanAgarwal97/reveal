@@ -90,25 +90,25 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
                     currentObj.addAnswer(i,tempArray.pop());           
                 });
             }
-          /*Add a points label to the top of the screen, if one exists then it updates the current label*/
-        this.addPointsLabel = function(points, update) {
-            //If this is not an update, create a new label//
-            if(!update) {
-                //Styling for the label
-                var labelStyle = new PIXI.TextStyle({
-                    fontFamily: 'Macondo, cursive',
-                    fontSize: 32,
-                    fill: '#ffffff',
-                });
-                pointslabel = new PIXI.Text("Score: " + points, labelStyle);
-                pointslabel.x = 500;
-                pointslabel.y = 150;
-                stage.addChild(pointslabel);
-                console.log("points label added");
-            } else {
-                pointslabel.text = "Score: " + points;
-            }    
-        }
+            /*Add a points label to the top of the screen, if one exists then it updates the current label*/
+            this.addPointsLabel = function(points, update) {
+                //If this is not an update, create a new label//
+                if(!update) {
+                    //Styling for the label
+                    var labelStyle = new PIXI.TextStyle({
+                        fontFamily: 'Macondo, cursive',
+                        fontSize: 32,
+                        fill: '#ffffff',
+                    });
+                    pointslabel = new PIXI.Text("Score: " + points, labelStyle);
+                    pointslabel.x = 500;
+                    pointslabel.y = 150;
+                    stage.addChild(pointslabel);
+                    console.log("points label added");
+                } else {
+                    pointslabel.text = "Score: " + points;
+                }    
+            }
 
         
         /*Stores extra questions to be used for refreshing box questions*/

@@ -35,8 +35,11 @@ canvas {
     border: none;
     width: 80%;
     height: 18%;
-    background: "black"
+    background: green;
+/*
+    background: "black";
     background-size: cover;
+*/
 
 }
 .questionHead{
@@ -51,15 +54,16 @@ canvas {
     margin-right:auto;
     margin-bottom:1vw;
     border: none;
+    border-radius: 15px;
+    -moz-border-radius:15px;
     width: 80%;
-    height:50%;
+    height:13%;
     background-image: url(resources/answerbook.png);
     background-size: cover;
 }
 /*highlight selected answer*/
-.answer:active{
-    background-image: url(resources/selectedAnswerbook.png);
-
+.answer:hover{
+   background-image: url(resources/selectedAnswerbook.png); 
 }
 
 .answerHead{
