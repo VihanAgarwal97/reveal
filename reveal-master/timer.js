@@ -16,7 +16,7 @@ define(["PIXI"], function(PIXI) {
                     fontSize: 32,
                     fill: '#ffffff',
                 });
-                timertext = new PIXI.Text(0, labelStyle);
+                timertext = new PIXI.Text("00:00", labelStyle);
                 timertext.position.x = 100;
                 timertext.position.y = 150;
                 stage.addChild(timertext);
@@ -26,16 +26,16 @@ define(["PIXI"], function(PIXI) {
             this.updateTime = function(picGuessed){
                     if(!picGuessed){
                         this.secs++;
+                        if (this.secs > 59){
+                           this.secs = "00"; 
+                           this.min++;
+                        }
                         if (this.sec<9){
                             this.sec = "0" + this.secs;
                         }
                         else{
                             this.sec = this.secs
                         }
-                       if (this.secs == 59){
-                           this.secs = 0; 
-                           this.min++;
-                       }
                         if (this.min<9){
                             this.minute = "0" + this.min; 
                         }
