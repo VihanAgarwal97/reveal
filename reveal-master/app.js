@@ -219,11 +219,20 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
             }
             return minimumReached;
         }
-
+        
+        var last=Date.now();
+        var timeElapsed = 0;
         /*Call to PIXI animator*/
         function animate(){
+            var now = Date.now();
+            timeElapsed += (now - last);
+            last = Date.now();
+            if(timeElapsed>=1000){
+                console.log(timeElapsed);
+                timer.updateTime(pictureGuessedCorrectly);
+                timeElapsed=0;
+            }
             renderer.render(stage);
-            timer.updateTime(pictureGuessedCorrectly);
             requestAnimationFrame(animate);
         }
 

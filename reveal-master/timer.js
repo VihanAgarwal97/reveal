@@ -20,14 +20,13 @@ define(["PIXI"], function(PIXI) {
                 timertext.position.x = 100;
                 timertext.position.y = 150;
                 stage.addChild(timertext);
-                console.log(timertext);
             }
             
               
             this.updateTime = function(picGuessed){
                     if(!picGuessed){
                         this.secs++;
-                        if (this.sec<10){
+                        if (this.sec<9){
                             this.sec = "0" + this.secs;
                         }
                         else{
@@ -37,13 +36,12 @@ define(["PIXI"], function(PIXI) {
                            this.secs = 0; 
                            this.min++;
                        }
-                        if (this.min<10){
+                        if (this.min<9){
                             this.minute = "0" + this.min; 
                         }
                         else{
                             this.minute = this.min;   
                         }
-                        console.log("trying to draw time to " + timertext.text);
                         this.drawTime();
                     }else{
                         console.log("Time ended");       
