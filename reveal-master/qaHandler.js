@@ -104,7 +104,6 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
                     pointslabel.x = 500;
                     pointslabel.y = 150;
                     stage.addChild(pointslabel);
-                    console.log("points label added");
                 } else {
                     pointslabel.text = "Score: " + points;
                 }    

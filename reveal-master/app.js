@@ -6,14 +6,14 @@ require.config({
         imgloader: "imgloader",
         PIXI: "http://pixijs.download/release/pixi.min",
         qaHandler: "qaHandler",
+        timer: "timer",
         sweetalert: "https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min",
         gamestate: "gamestate",
-        timer: "timer",
     }
 });
 
-require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate","timer"], 
-    function(questionAPI, imgloader, qaHandler, $, PIXI, gamestate,timer) 
+require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gamestate"], 
+    function($, questionAPI, imgloader, PIXI, qaHandler, timer, gamestate) 
     {
         function loadCss() {
             var link = document.createElement("link");
@@ -45,8 +45,6 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate",
         document.getElementById("canvas-container").appendChild(renderer.view);
         /*New PIXI Container to hold all sprites.*/
         var stage = new PIXI.Container();
-        requestAnimationFrame(animate);
-
 
         /*Create a new questionAPI object*/
         var questionAPI = new questionAPI.APIRequester();
@@ -61,15 +59,14 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate",
         var qah = new qaHandler.QAHandler(stage, currState); 
     
         /*Creates a timer object*/
-        var timer = new timer.Timer(stage);
+        var timer= new timer.Timer(stage);
 
         /*Function that sets up the app*/
         $("document").ready(function setup(){
 
             qah.hidePaneElements();
 
-            var questionListPromise = 
-                questionAPI.requestData();
+            var questionListPromise = questionAPI.requestData();
 
 
             imageloader.imgPromise.then(function() {
@@ -79,12 +76,11 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate",
                 imageloader.currentImage = thisImg;
                 var url ="resources/" + thisImg.url;
                 qah.addPointsLabel(currState.points,false);
-                timer.addTimerToStage();
-                timer.startTime();
                 addPicture(url);
                 addSquares(no_grids);
                 addGuessButton();
-
+                timer.addTimerToStage();
+                requestAnimationFrame(animate);
             });
 
             questionListPromise.then(function() {
@@ -227,6 +223,7 @@ require(["questionAPI", "imgloader", "qaHandler", "jquery", "PIXI", "gamestate",
         /*Call to PIXI animator*/
         function animate(){
             renderer.render(stage);
+            timer.updateTime(pictureGuessedCorrectly);
             requestAnimationFrame(animate);
         }
 

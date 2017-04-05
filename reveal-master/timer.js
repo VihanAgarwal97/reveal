@@ -8,71 +8,55 @@ define(["PIXI"], function(PIXI) {
             this.min =0;
             this.time=0;            
             this.stage = stage;
-            
+            this.timertext;
+
             this.addTimerToStage = function(){
                 var labelStyle = new PIXI.TextStyle({
                     fontFamily: 'Macondo, cursive',
                     fontSize: 32,
                     fill: '#ffffff',
                 });
-                var timerText = new PIXI.Text(0, labelStyle);
-                timerText.position.x = 100;
-                timerText.position.y = 150;
-                stage.addChild(timerText);
+                timertext = new PIXI.Text(0, labelStyle);
+                timertext.position.x = 100;
+                timertext.position.y = 150;
+                stage.addChild(timertext);
+                console.log(timertext);
             }
             
-            this.startTime = function() {
-                setTimeout(updateTimeSections(),1000);
-            }
-            
-            this.updateTimeSections = function() {
-                secs = secs +1;
-                if (sec<10){
-                    sec = "0" + secs;
-                }
-                else{
-                    sec = secs
-                }
-               if (secs == 59){
-                   secs = 0; 
-                   min++;
-               }
-                if (min<10){
-                    minute = "0" + min; 
-
-                }
-                else{
-                    minute = min;   
-                }  
-                drawTime();
-            }
+              
+            this.updateTime = function(picGuessed){
+                    if(!picGuessed){
+                        this.secs++;
+                        if (this.sec<10){
+                            this.sec = "0" + this.secs;
+                        }
+                        else{
+                            this.sec = this.secs
+                        }
+                       if (this.secs == 59){
+                           this.secs = 0; 
+                           this.min++;
+                       }
+                        if (this.min<10){
+                            this.minute = "0" + this.min; 
+                        }
+                        else{
+                            this.minute = this.min;   
+                        }
+                        console.log("trying to draw time to " + timertext.text);
+                        this.drawTime();
+                    }else{
+                        console.log("Time ended");       
+                    }
+            }   
             
             this.drawTime = function() {
-                timertext.text = minute + ":" + sec;
+                timertext.text = this.minute + ":" + this.sec;
             }
             
             this.stopTime = function() {
-                return (minute*60) + sec;
+                return (this.minute*60) + this.sec;
             }
         }
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-    
-   
-   
-   
-    function updateTimeSections(){
-        
-    }
