@@ -1,10 +1,10 @@
 bunny.jpg$BUNNY
-candles.jpg$CANDLES
+candle.jpg$CANDLES
 Coffee.jpg$COFFEE
-dolphins.jpg$DOLPHINS
-forks.jpg$FORKS
+dolphin.jpg$DOLPHINS
+fork.jpg$FORKS
 fox.jpg$FOX
 panda.jpg$PANDA
 pizza.jpg$PIZZA
 rhino.jpg$RHINO
-straws.jpg$STRAWS
+straw.jpg$STRAWS

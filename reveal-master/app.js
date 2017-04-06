@@ -157,8 +157,9 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
         /*Handles the guess functionality*/
         function prepareGuessbox() {
             if(!pictureGuessedCorrectly) {
+                var answer = imageloader.currentImage.name.toLowerCase();
                 swal({
-                      title: "Guess the picture",
+                      title: "Guess the picture (" + answer.length + " letters)",
                       type: "input",
                       showCancelButton: true,
                       closeOnConfirm: false,
@@ -169,13 +170,13 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
                       if (inputValue === false) return false;
                       if (inputValue === "") return false;
                       guess = inputValue.toLowerCase();
-                      var answer = imageloader.currentImage.name.toLowerCase();
                       var correctAnswer=guess.search(answer);
                       if (correctAnswer!= -1 ) {
-                          pictureGuessedCorrectly = true;
-                          swal("Nice!", "You guessed correct!", "success");
+                          handleCorrectGuess();
                       } else {
-                          if(similar(guess,answer)){
+                          handleIncorrectGuess();
+                      }
+                          /*if(similar(guess,answer)){
                               swal({
                                   title: "Did you mean?",
                                   text: answer,
@@ -185,15 +186,20 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
                                   confirmButtonText: "Yes!",
                                   closeOnConfirm: false
                                 },
-                                function(){
-                                  pictureGuessedCorrectly=true;
-                                  swal("Nice!", "You guessed correct!", "success");
-                                });
+                                function(confirmed) {
+                                  if(confirmed) {
+                                    handleCorrectGuess();
+                                  }
+                                  else {
+                                      handleIncorrectGuess();
+                                  }
+                              });
 
                           } else {
-                                swal("Oops!","You guessed wrong!","error");
+                                handleIncorrectGuess();
                           }
                       }
+                    });*/
                     });
                 } else {
                     swal("Oops", "You have already guessed the picture","error");
@@ -219,6 +225,23 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
             }
             return minimumReached;
         }
+    
+        function handleCorrectGuess() {
+            pictureGuessedCorrectly = true;
+            swal("Nice!", "You guessed correct!", "success");
+            clearBoxes(stage, gridSquares);
+        }
+    
+        function handleIncorrectGuess() {
+            swal("Oops!","You guessed wrong!","error");
+        }
+    
+        function clearBoxes(stage, boxList) {
+            for(var box in boxList) {
+                console.log(box);
+                stage.removeChild(boxList[box]);
+            }
+        }
         
         var last=Date.now();
         var timeElapsed = 0;
@@ -228,7 +251,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
             timeElapsed += (now - last);
             last = Date.now();
             if(timeElapsed>=1000){
-                console.log(timeElapsed);
+                //console.log(timeElapsed);
                 timer.updateTime(pictureGuessedCorrectly);
                 timeElapsed=0;
             }

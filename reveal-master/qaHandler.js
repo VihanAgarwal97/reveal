@@ -145,7 +145,6 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
                     showConfirmButton: false
                 });
                 
-                /*REQUIRE JS FIX NEEDED*/
                 this.gamestate.addPoints(50);
                 this.addPointsLabel(this.gamestate.points,true);
             }
