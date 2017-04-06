@@ -2,9 +2,9 @@ bunny.jpg$BUNNY
 candle.jpg$CANDLES
 Coffee.jpg$COFFEE
 dolphin.jpg$DOLPHINS
-fork.jpg$FORKS
+fork.jpg$FORK
 fox.jpg$FOX
 panda.jpg$PANDA
 pizza.jpg$PIZZA
 rhino.jpg$RHINO
-straw.jpg$STRAWS
+straw.jpg$STRAW
