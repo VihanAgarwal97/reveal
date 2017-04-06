@@ -1,5 +1,5 @@
 bunny.jpg$BUNNY
-candle.jpg$CANDLES
+candle.jpg$CANDLE
 Coffee.jpg$COFFEE
 dolphin.jpg$DOLPHINS
 fork.jpg$FORK
