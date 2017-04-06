@@ -1,7 +1,7 @@
 bunny.jpg$BUNNY
 candle.jpg$CANDLE
 Coffee.jpg$COFFEE
-dolphin.jpg$DOLPHINS
+dolphin.jpg$DOLPHIN
 fork.jpg$FORK
 fox.jpg$FOX
 panda.jpg$PANDA
