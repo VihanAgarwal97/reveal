@@ -157,7 +157,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
         /*Handles the guess functionality*/
         function prepareGuessbox() {
             if(!pictureGuessedCorrectly) {
-                var answer = imageloader.currentImage.name.toLowerCase();
+                var answer = imageloader.currentImage.name.toLowerCase().trim();
                 swal({
                       title: "Guess the picture (" + answer.length + " letters)",
                       type: "input",
@@ -172,34 +172,12 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
                       guess = inputValue.toLowerCase();
                       var correctAnswer=guess.search(answer);
                       if (correctAnswer!= -1 ) {
+                          console.log("correcT!");
                           handleCorrectGuess();
                       } else {
+                          console.log("wrong!")
                           handleIncorrectGuess();
                       }
-                          /*if(similar(guess,answer)){
-                              swal({
-                                  title: "Did you mean?",
-                                  text: answer,
-                                  type: "warning",
-                                  showCancelButton: true,
-                                  confirmButtonColor: "#DD6B55",
-                                  confirmButtonText: "Yes!",
-                                  closeOnConfirm: false
-                                },
-                                function(confirmed) {
-                                  if(confirmed) {
-                                    handleCorrectGuess();
-                                  }
-                                  else {
-                                      handleIncorrectGuess();
-                                  }
-                              });
-
-                          } else {
-                                handleIncorrectGuess();
-                          }
-                      }
-                    });*/
                     });
                 } else {
                     swal("Oops", "You have already guessed the picture","error");
@@ -211,7 +189,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
         */
         function similar(guess, correctAnswer, minCharactersCorrect=3) {
             /*minCharactersCorrect controls how many letters need to match 
-            in order to deem the guess 'close enough.'*/
+            in order to deem the guess 'close enough.'*/    
             var minimumReached = false;
 
             for(var i=0; i<correctAnswer.length-minCharactersCorrect+1; i++) {
@@ -238,7 +216,6 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
     
         function clearBoxes(stage, boxList) {
             for(var box in boxList) {
-                console.log(box);
                 stage.removeChild(boxList[box]);
             }
         }
@@ -247,17 +224,20 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
         var timeElapsed = 0;
         /*Call to PIXI animator*/
         function animate(){
-            var now = Date.now();
-            timeElapsed += (now - last);
-            last = Date.now();
-            if(timeElapsed>=1000){
-                //console.log(timeElapsed);
-                timer.updateTime(pictureGuessedCorrectly);
-                timeElapsed=0;
+            if(!pictureGuessedCorrectly) {
+                var now = Date.now();
+                timeElapsed += (now - last);
+                last = Date.now();
+                if(timeElapsed>=1000){
+                    timer.updateTime();
+                    timeElapsed=0;
+                }
             }
+           
             renderer.render(stage);
             requestAnimationFrame(animate);
         }
+    
 
         /*Defines a function for a grid square when clicked*/
         function clickEvent_grid(){

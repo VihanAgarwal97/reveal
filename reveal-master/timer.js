@@ -1,4 +1,4 @@
-/*This file holds the current game state*/
+/*This file holds a timer*/
 define(["PIXI"], function(PIXI) {
     return {
         Timer: function(stage) {
@@ -9,7 +9,8 @@ define(["PIXI"], function(PIXI) {
             this.time=0;            
             this.stage = stage;
             this.timertext;
-
+            
+            /*Render the timer to the PIXI Stage*/
             this.addTimerToStage = function(){
                 var labelStyle = new PIXI.TextStyle({
                     fontFamily: 'Macondo, cursive',
@@ -22,38 +23,49 @@ define(["PIXI"], function(PIXI) {
                 stage.addChild(timertext);
             }
             
-              
-            this.updateTime = function(picGuessed){
-                    if(!picGuessed){
-                        this.secs++;
-                        if (this.secs > 59){
-                           this.secs = "00"; 
-                           this.min++;
-                        }
-                        if (this.sec<9){
-                            this.sec = "0" + this.secs;
-                        }
-                        else{
-                            this.sec = this.secs
-                        }
-                        if (this.min<9){
-                            this.minute = "0" + this.min; 
-                        }
-                        else{
-                            this.minute = this.min;   
-                        }
-                        this.drawTime();
-                    }else{
-                        console.log("Time ended");       
+            /*Update the time. Increase seconds by 1 until picGuessed is true*/  
+            this.updateTime = function(){
+                    this.secs++;
+                    if (this.secs > 59){
+                       this.secs = "00"; 
+                       this.min++;
                     }
-            }   
+                    if (this.sec<9){
+                        this.sec = "0" + this.secs;
+                    }
+                    else{
+                        this.sec = this.secs
+                    }
+                    if (this.min<9){
+                        this.minute = "0" + this.min; 
+                    }
+                    else{
+                        this.minute = this.min;   
+                    }
+                    this.drawTime();
+            } 
             
+            /*Update the timer label*/
             this.drawTime = function() {
                 timertext.text = this.minute + ":" + this.sec;
             }
             
-            this.stopTime = function() {
-                return (this.minute*60) + this.sec;
+            /*Get time in seconds*/
+            this.getTime = function() {
+                var min,second;
+                if(this.minute[0]=="0"){
+                    min=this.minute[1];
+                }else {
+                    min=this.minute;
+                }
+                if(this.sec[0]=="0"){
+                    second=this.sec[1];
+                }else {
+                    second=this.sec;
+                }
+                
+                totalTime = (parseInt(min)*60)+parseInt(second);
+                return totalTime;
             }
         }
     }
