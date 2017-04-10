@@ -9,11 +9,12 @@ require.config({
         timer: "timer",
         sweetalert: "https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min",
         gamestate: "gamestate",
+        guessboxFunctionality: "guessboxFunctionality",
     }
 });
 
-require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gamestate"], 
-    function($, questionAPI, imgloader, PIXI, qaHandler, timer, gamestate) 
+require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gamestate", "guessboxFunctionality"], 
+    function($, questionAPI, imgloader, PIXI, qaHandler, timer, gamestate, guessboxFunctionality) 
     {
         function loadCss() {
             var link = document.createElement("link");
@@ -60,6 +61,11 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
     
         /*Creates a timer object*/
         var timer= new timer.Timer(stage);
+    
+        var gbFunct = new 
+        guessboxFunctionality.GuessboxFunctionality(imageloader, 
+                                                    stage,
+                                                    gridSquares);
 
         /*Function that sets up the app*/
         $("document").ready(function setup(){
@@ -67,7 +73,6 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
             qah.hidePaneElements();
 
             var questionListPromise = questionAPI.requestData();
-
 
             imageloader.imgPromise.then(function() {
                 var imgindex=Math.floor(Math.random() * 
@@ -81,6 +86,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
                 addGuessButton();
                 timer.addTimerToStage();
                 requestAnimationFrame(animate);
+                gbFunct.prepareGuessbox();
             });
 
             questionListPromise.then(function() {
@@ -103,7 +109,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
             guessbutton.x = 300;
             guessbutton.y = 50;
             guessbutton.interactive = true;
-            guessbutton.on('click',prepareGuessbox);
+            gbFunct.guessbox = guessbutton;
             stage.addChild(guessbutton);
         }
 
@@ -152,95 +158,6 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
                     square.question = questionAPI.questionList.pop();
                 }
             });
-        }
-
-        /*Handles the guess functionality*/
-        function prepareGuessbox() {
-            if(!pictureGuessedCorrectly) {
-                var answer = imageloader.currentImage.name.toLowerCase();
-                swal({
-                      title: "Guess the picture (" + answer.length + " letters)",
-                      type: "input",
-                      showCancelButton: true,
-                      closeOnConfirm: false,
-                      animation: "slide-from-top",
-                      inputPlaceholder: "Enter your guess here..."
-                    },
-                    function(inputValue){
-                      if (inputValue === false) return false;
-                      if (inputValue === "") return false;
-                      guess = inputValue.toLowerCase();
-                      var correctAnswer=guess.search(answer);
-                      if (correctAnswer!= -1 ) {
-                          handleCorrectGuess();
-                      } else {
-                          handleIncorrectGuess();
-                      }
-                          /*if(similar(guess,answer)){
-                              swal({
-                                  title: "Did you mean?",
-                                  text: answer,
-                                  type: "warning",
-                                  showCancelButton: true,
-                                  confirmButtonColor: "#DD6B55",
-                                  confirmButtonText: "Yes!",
-                                  closeOnConfirm: false
-                                },
-                                function(confirmed) {
-                                  if(confirmed) {
-                                    handleCorrectGuess();
-                                  }
-                                  else {
-                                      handleIncorrectGuess();
-                                  }
-                              });
-
-                          } else {
-                                handleIncorrectGuess();
-                          }
-                      }
-                    });*/
-                    });
-                } else {
-                    swal("Oops", "You have already guessed the picture","error");
-                }
-
-        }
-
-        /*Finds out if the image guess was close enough to the correct answer. 
-        */
-        function similar(guess, correctAnswer, minCharactersCorrect=3) {
-            /*minCharactersCorrect controls how many letters need to match 
-            in order to deem the guess 'close enough.'*/
-            var minimumReached = false;
-
-            for(var i=0; i<correctAnswer.length-minCharactersCorrect+1; i++) {
-                var answerSubstring = 
-                    correctAnswer.substring(i, i+minCharactersCorrect);
-
-                if(guess.search(answerSubstring) != -1) {
-                    minimumReached = true;
-                    break;
-                }
-            }
-            return minimumReached;
-        }
-    
-        function handleCorrectGuess() {
-            pictureGuessedCorrectly = true;
-            swal("Nice!", "You guessed correct!", "success");
-            clearBoxes(stage, gridSquares);
-        }
-    
-        function handleIncorrectGuess() {
-            swal("Oops!","You guessed wrong!","error");
-        }
-    
-        function clearBoxes(stage, boxList) {
-            for(var box in boxList) {
-                console.log(box);
-                stage.removeChild(boxList[box]);
-            }
         }
         
         var last=Date.now();
