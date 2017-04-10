@@ -11,8 +11,7 @@ define(["sweetalert"], function(sweetalert){
                 var currentObj = this;
                 this.guessbox.on("click", function() {
                     if(!this.pictureGuessedCorrectly) {
-                        var answer = 
-                currentObj.imgloader.currentImage.name.toLowerCase();
+                        var answer = currentObj.imgloader.currentImage.name.toLowerCase().trim();
                         swal({
                               title: "Guess the picture (" + answer.length + " letters)",
                               type: "input",

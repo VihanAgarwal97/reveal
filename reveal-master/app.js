@@ -174,7 +174,6 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
                     timeElapsed=0;
                 }
             }
-           
             renderer.render(stage);
             requestAnimationFrame(animate);
         }
