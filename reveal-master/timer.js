@@ -18,7 +18,7 @@ define(["PIXI"], function(PIXI) {
                     fill: '#ffffff',
                 });
                 timertext = new PIXI.Text("00:00", labelStyle);
-                timertext.position.x = 100;
+                timertext.position.x = 120;
                 timertext.position.y = 150;
                 stage.addChild(timertext);
             }
@@ -64,9 +64,8 @@ define(["PIXI"], function(PIXI) {
                     second=this.sec;
                 }
                 
-                totalTime = (parseInt(min)*60)+parseInt(second);
-                
-                return 100 + Math.exp(-totalTime);
+                totalTime = (parseInt(min)*60)+parseInt(second);            
+                return 3000 * Math.exp(-1 * totalTime * .05);
             }
         }
     }

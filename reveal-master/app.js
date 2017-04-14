@@ -182,11 +182,9 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
         /*A function that ends the game and calculates the total number of points won*/
         function endGame(){
             guesspoints = timer.getTimePoints();
-            totalpoints = guesspoints + currState.points;
-//            swal({
-//              title: 'Game Over!',
-//              text: 'You have ' + Math.ceil(totalpoints) + ' points!',
-//            });
+            gridpoints = gridSquares.length * 150;
+            totalpoints = guesspoints + currState.points + gridpoints;
+
             swal('Game Over! You got '+Math.ceil(totalpoints)+ ' points!');
         }
         
