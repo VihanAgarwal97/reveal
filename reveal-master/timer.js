@@ -51,7 +51,7 @@ define(["PIXI"], function(PIXI) {
             }
             
             /*Get time in seconds*/
-            this.getTime = function() {
+            this.getTimePoints = function() {
                 var min,second;
                 if(this.minute[0]=="0"){
                     min=this.minute[1];
@@ -65,7 +65,8 @@ define(["PIXI"], function(PIXI) {
                 }
                 
                 totalTime = (parseInt(min)*60)+parseInt(second);
-                return totalTime;
+                
+                return 100 + Math.exp(-totalTime);
             }
         }
     }

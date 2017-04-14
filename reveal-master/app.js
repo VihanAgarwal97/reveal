@@ -169,12 +169,25 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
                     timer.updateTime();
                     timeElapsed=0;
                 }
-            }
-            renderer.render(stage);
-            requestAnimationFrame(animate);
+                renderer.render(stage);
+                requestAnimationFrame(animate);
+            }else {
+                renderer.render(stage);
+                endGame();
+            } 
         }
-    
-
+        
+        /*A function that ends the game and calculates the total number of points won*/
+        function endGame(){
+            guesspoints = timer.getTimePoints();
+            totalpoints = guesspoints + currState.points;
+//            swal({
+//              title: 'Game Over!',
+//              text: 'You have ' + Math.ceil(totalpoints) + ' points!',
+//            });
+            swal('Game Over! You got '+Math.ceil(totalpoints)+ ' points!');
+        }
+        
         /*Defines a function for a grid square when clicked*/
         function clickEvent_grid(){
             if(qah.isClicked) {
@@ -184,8 +197,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
                 qah.updateQuestionPane(this);
             }
             qah.showPaneElements();
-            this.texture = new 
-            PIXI.Texture.fromImage("resources/selectedQuizBox150.png");
+            this.texture = new PIXI.Texture.fromImage("resources/selectedQuizBox150.png");
             qah.isClicked = true;
         }
 

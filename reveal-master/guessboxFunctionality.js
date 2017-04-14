@@ -26,11 +26,9 @@ define(["sweetalert"], function(sweetalert){
                               guess = inputValue.toLowerCase();
                               var correctAnswer = guess.search(answer);
                               if (correctAnswer!= -1 ) {
-                                currentObj.handleCorrectGuess(
-                                            currentObj.boxList
-                                        );
-                              } else {
-                                  currentObj.handleIncorrectGuess();
+                                currentObj.handleCorrectGuess();
+                              }else {
+                                currentObj.handleIncorrectGuess();
                               }
                             });
                     } else {
@@ -43,16 +41,17 @@ define(["sweetalert"], function(sweetalert){
             this.handleCorrectGuess = function(boxList) {
                 this.pictureGuessedCorrectly = true;
                 swal("Nice!", "You guessed correct!", "success");
-                this.clearBoxes(boxList);
+                //this.clearBoxes(boxList);
+                this.clearStage();
             }
 
             this.handleIncorrectGuess = function() {
                 swal("Oops!","You guessed wrong!","error");
             }
 
-            this.clearBoxes = function(boxList) {
-                for(var box in boxList) {
-                    this.stage.removeChild(boxList[box]);
+            this.clearStage = function() {
+                for (var i = stage.children.length - 1; i >= 0; i--) {	
+                    stage.removeChild(stage.children[i]);
                 }
             }
         }
