@@ -37,13 +37,11 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
         /*Stores the size of each grid square*/
         var grid_side=150;
 
-        /*Stores whether the user correctly guessed the picture*/
-        var pictureGuessedCorrectly = false;
-
         /*Create a new PIXI renderer and and it to the DOM*/
         var renderer = PIXI.autoDetectRenderer(700,900);
         renderer.backgroundColor = 0x000000;
         document.getElementById("canvas-container").appendChild(renderer.view);
+    
         /*New PIXI Container to hold all sprites.*/
         var stage = new PIXI.Container();
 
@@ -62,10 +60,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
         /*Creates a timer object*/
         var timer= new timer.Timer(stage);
     
-        var gbFunct = new 
-        guessboxFunctionality.GuessboxFunctionality(imageloader, 
-                                                    stage,
-                                                    gridSquares);
+        var gbFunct = new guessboxFunctionality.GuessboxFunctionality(imageloader, stage, gridSquares);
 
         /*Function that sets up the app*/
         $("document").ready(function setup(){
@@ -80,6 +75,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
                 var thisImg=imageloader.imginfo[imgindex];
                 imageloader.currentImage = thisImg;
                 var url ="resources/" + thisImg.url;
+                
                 qah.addPointsLabel(currState.points,false);
                 addPicture(url);
                 addSquares(no_grids);
@@ -165,7 +161,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
         var timeElapsed = 0;
         /*Call to PIXI animator*/
         function animate(){
-            if(!pictureGuessedCorrectly) {
+            if(!gbFunct.pictureGuessedCorrectly) {
                 var now = Date.now();
                 timeElapsed += (now - last);
                 last = Date.now();

@@ -23,7 +23,7 @@ define(["PIXI"], function(PIXI) {
                 stage.addChild(timertext);
             }
             
-            /*Update the time. Increase seconds by 1 until picGuessed is true*/  
+            /*Update the time. Increase seconds by 1*/  
             this.updateTime = function(){
                     this.secs++;
                     if (this.secs > 59){
