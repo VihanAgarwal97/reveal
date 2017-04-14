@@ -1,6 +1,6 @@
 bunny.jpg$BUNNY
 candle.jpg$CANDLE
-Coffee.jpg$COFFEE
+Mug.jpg$MUG
 dolphin.jpg$DOLPHIN
 fork.jpg$FORK
 fox.jpg$FOX

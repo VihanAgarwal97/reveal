@@ -64,6 +64,8 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
 
         /*Function that sets up the app*/
         $("document").ready(function setup(){
+            h = $("canvas").css("height");
+            $("#sidePane").css("height",h);
 
             qah.hidePaneElements();
 
