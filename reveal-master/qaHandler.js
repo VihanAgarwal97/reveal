@@ -9,6 +9,9 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
             /*Stores the points label*/
             this.pointslabel;
             
+            /*Stores how long to display the correct/wrong indicator when an answer is clicked*/
+            this.answerTimeout = 500;
+            
             this.stage = stage;
             
             this.gamestate = gState;
@@ -77,6 +80,7 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
                 var answerHead = $("<h2 class='answerHead'>"); 
                 answerHead.html(answer);
                 $("#answer"+index).append(answerHead);
+                $("#answer"+index).css("background-image", "url(resources/answerbook.png)")
             }
 
             /*Adds the incorrect answers to the answer divs once the correct answer has been added*/
@@ -115,12 +119,8 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
      
         var currentObj = this;
         $(".answer").click(function (event) {
-
-
             if(event.target.className == "answerHead"){
                 currentObj.checkCorrect(event.target.parentElement);
-
-
             } else {
                 currentObj.checkCorrect(event.target);
             }
@@ -131,56 +131,56 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
         this.checkCorrect = function(item){
             var id=item.id;
             var answer=$("#"+id+" .answerHead").html();
+            var answerDiv = $("#" + id)
             
             if(answer==this.activeGrid.question.correct_answer){
-                this.stage.removeChild(this.activeGrid);
-                
-                //alert to say you are correct
-                swal({
-                    title: "Congratulations!!",
-                    text: "You are correct!",
-                    type: "success",
-                    imageUrl: "resources/images.jpeg",
-                    timer: 1500,
-                    showConfirmButton: false
-                });
-                
-                this.gamestate.addPoints(50);
-                this.addPointsLabel(this.gamestate.points,true);
+                answerDiv.css("background-image", "url(resources/CorrectBook.png)")
+                setTimeout(function(){
+                    currentObj.handleCorrect(answerDiv);
+                },currentObj.answerTimeout);                
             }
             else {
-                //Alert to say you are wrong
-                swal({
-                    title: "Oh no!",
-                    text: "You are wrong.",
-                    type: "error",
-                    imageUrl: "resources/sad-dog.jpg",
-                    timer: 1500,
-                    showConfirmButton: false
-                });
-                
-                /*REQUIRE JS FIX NEEDED*/
-                this.gamestate.addPoints(-10);
-                this.addPointsLabel(this.gamestate.points,true);
-                
-                if(this.extraQuestions.questionList.length == 0) {
-                    var extraQuestionsPromise = 
-                        this.extraQuestions.requestData();
-                    extraQuestionsPromise.then(function() {
-                        console.log("Refreshed questions.");
-                    });
-                }
-                else {
-                    this.activeGrid.question = 
-                        this.extraQuestions.questionList.pop();
-                }
+                answerDiv.css("background-image", "url(resources/WrongBook.png)")
+                setTimeout(function() {
+                    currentObj.handleIncorrect(answerDiv);
+                },currentObj.answerTimeout);               
             }
+        }
+        
+        this.handleCorrect = function(answer) {
+            console.log("entered correct");
+            this.gamestate.addPoints(50);
+            this.addPointsLabel(this.gamestate.points,true);
+            this.stage.removeChild(this.activeGrid);
+            this.resetPane();
+        }
+        
+        this.handleIncorrect = function(answer) {
+            console.log("entered incorrect");
+            this.gamestate.addPoints(-10);
+            this.addPointsLabel(this.gamestate.points,true);
+                
+            if(this.extraQuestions.questionList.length == 0) {
+                var extraQuestionsPromise = this.extraQuestions.requestData();
+                extraQuestionsPromise.then(function() {
+                    console.log("Refreshed questions.");
+                });
+            }
+            else {
+                this.activeGrid.question = this.extraQuestions.questionList.pop();
+            }
+            this.resetPane();
+        }
+        
+        this.resetPane = function() {
                 this.hidePaneElements();
                 this.clearPane();
                 this.activeGrid.texture = new PIXI.Texture.fromImage("resources/quizbox150.png");
                 this.activeGrid = null;
                 this.isClicked= false;
+            }
+        
+        
         }
-    }
     }
 });
