@@ -80,7 +80,7 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
                 var answerHead = $("<h2 class='answerHead'>"); 
                 answerHead.html(answer);
                 $("#answer"+index).append(answerHead);
-                $("#answer"+index).css("background-image", "url(resources/answerbook.png)")
+                $("#answer"+index).css("background-image", "url(resources/regAnswerButton.png)")
             }
 
             /*Adds the incorrect answers to the answer divs once the correct answer has been added*/
@@ -134,13 +134,13 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
             var answerDiv = $("#" + id)
             
             if(answer==this.activeGrid.question.correct_answer){
-                answerDiv.css("background-image", "url(resources/CorrectBook.png)")
+                answerDiv.css("background-image", "url(resources/CorrectAnswerButton.png)")
                 setTimeout(function(){
                     currentObj.handleCorrect(answerDiv);
                 },currentObj.answerTimeout);                
             }
             else {
-                answerDiv.css("background-image", "url(resources/WrongBook.png)")
+                answerDiv.css("background-image", "url(resources/answerButton.png)")
                 setTimeout(function() {
                     currentObj.handleIncorrect(answerDiv);
                 },currentObj.answerTimeout);               

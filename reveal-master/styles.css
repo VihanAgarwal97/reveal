@@ -35,7 +35,7 @@ canvas {
     border: none;
     width: 80%;
     height: 18%;
-    background: green;
+    background-image: url(resources/regAnswerButton.png);
 
 }
 .questionHead{
@@ -54,12 +54,12 @@ canvas {
     -moz-border-radius:15px;
     width: 80%;
     height:13%;
-    background-image: url(resources/answerbook.png);
+    background-image: url(resources/regAnswerButton.png)
     background-size: cover;
 }
 /*highlight selected answer*/
 .answer:hover{
-   background-image: url(resources/selectedAnswerbook.png); 
+   background-image: url(resources/hoverAnswer.png); 
 }
 
 .answerHead{
