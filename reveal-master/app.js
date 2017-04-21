@@ -102,7 +102,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
 
         /*Adds the guess button to the pixi canvas*/
         function addGuessButton() {
-            var but_texture = new PIXI.Texture.fromImage("resources/guessbutton.png");
+            var but_texture = new PIXI.Texture.fromImage("resources/Magnifying_Glass.png");
             var guessbutton = new PIXI.Sprite(but_texture);
             guessbutton.x = 300;
             guessbutton.y = 50;
