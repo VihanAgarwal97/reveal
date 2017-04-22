@@ -50,8 +50,11 @@ define(["sweetalert"], function(sweetalert){
             }
 
             this.clearStage = function() {
-                for (var i = stage.children.length - 1; i >= 0; i--) {	
-                    stage.removeChild(stage.children[i]);
+                for (var i = stage.children.length - 1; i >= 0; i--) {
+                    console.log(imgloader.imginfo);
+                    if(!(stage.children[i] in imgloader.imginfo)) {
+                        stage.removeChild(stage.children[i]);
+                    }
                 }
             }
         }

@@ -81,17 +81,22 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
                 qah.addPointsLabel(currState.points,false);
                 addPicture(url);
                 addSquares(no_grids);
+                questionListPromise.then(function() {
+                    assignQuestions();
+                    qah.extraQuestions.questionList = 
+                                questionAPI.questionList;
+                });
                 addGuessButton();
                 timer.addTimerToStage();
                 requestAnimationFrame(animate);
                 gbFunct.prepareGuessbox();
             });
 
-            questionListPromise.then(function() {
+            /*questionListPromise.then(function() {
                 assignQuestions();
                 qah.extraQuestions.questionList = 
                             questionAPI.questionList;
-            });
+            });*/
 
             //Handle height of side pane based on canvas every time the window is resized
             $(window).resize(function (){
@@ -173,7 +178,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
                 }
                 renderer.render(stage);
                 requestAnimationFrame(animate);
-            }else {
+            } else {
                 renderer.render(stage);
                 endGame();
             } 
@@ -184,6 +189,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
             guesspoints = timer.getTimePoints();
             gridpoints = gridSquares.length * 150;
             totalpoints = guesspoints + currState.points + gridpoints;
+            qah.hidePaneElements();
 
             swal('Game Over! You got '+Math.ceil(totalpoints)+ ' points!');
         }

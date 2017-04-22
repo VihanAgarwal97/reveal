@@ -15,8 +15,10 @@ define(["jquery"], function($) {
 
                     for(var i=0;i<lines.length;i++){
                         var info=lines[i].split("$");
-                        currentObj.imginfo[i]=
-                            currentObj.createImage(info[0],info[1]);
+                        if(info[0] != "") {
+                            currentObj.imginfo[i]=
+                                currentObj.createImage(info[0],info[1]);
+                        }
                     };
                     resolve(currentObj.imginfo);
                 },"text");
