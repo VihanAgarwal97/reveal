@@ -8,6 +8,11 @@ define(["jquery"], function($) {
         this.questionNum = questionNum;
         this.questions_seen = new Array();
         this.questionList = new Array();
+        this.category = 0;
+        
+        this.setCategory = function(category) {
+            this.category = category;
+        }
         
         this.requestData = function() {
             var parentObj = this;
@@ -20,7 +25,8 @@ define(["jquery"], function($) {
                     dataType: 'json',
                     data: 
                     {
-                        difficulty: 'easy', 
+                        difficulty: 'easy',
+                        category: parentObj.category,
                         amount: parentObj.questionNum
                     },
 
