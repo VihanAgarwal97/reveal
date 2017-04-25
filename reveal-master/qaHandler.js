@@ -66,6 +66,23 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
                 this.addQuestion(questiontext);
                 this.addAnswer(correct_index,correctAnswer);
                 this.addIncorrectAnswers(incorrectAnswers);
+                
+                
+                /*Handler function for entering a div*/
+                mouseEnter = function(){
+                    $('.answer').css('font-size','2vw');
+                    $('.answer').css('color','white');
+                }
+
+                /*Handler function for leaving a div*/
+                mouseExit = function() {
+                    $('.answer').css('font-size','1.75vw');
+                    $('.answer').css('color','black');
+                }
+                
+                /*Enable answer for div*/
+                $('.answer').hover(mouseEnter, mouseExit);
+
             }
 
             /*Adds a question to the question div*/
@@ -125,6 +142,7 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
                 currentObj.checkCorrect(event.target);
             }
         });
+            
 
 
         /*Check if the clicked option corresponds to the correct answer*/
@@ -182,5 +200,7 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
         
         
         }
+        
     }
+    
 });

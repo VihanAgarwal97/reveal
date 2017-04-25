@@ -23,12 +23,14 @@ canvas {
 #sidePane{
     display: inline;
     width: 50%;
+    margin-top: 4%;
     background: #000000;
 }
 
 
 /*Styling for the question*/
 #question{
+    display: table;
     margin-bottom:3vw;
     margin-left:auto;
     margin-right:auto;
@@ -36,12 +38,15 @@ canvas {
     width: 80%;
     height: 18%;
     background-image: url(resources/regAnswerButton.png);
+    background-size: cover;
 
 }
 .questionHead{
-    color:red;
+    display: table-cell;
+    color:white;
     text-align: center;
     font-size: 2vw;
+    vertical-align: middle;
 }
 
 /*Styling for the answers*/
@@ -54,16 +59,15 @@ canvas {
     -moz-border-radius:15px;
     width: 80%;
     height:13%;
-    background-image: url(resources/regAnswerButton.png)
+    display: table;
+    background-image: url(resources/regAnswerButton.png);
     background-size: cover;
-}
-/*highlight selected answer*/
-.answer:hover{
-   background-image: url(resources/hoverAnswer.png); 
 }
 
 .answerHead{
-    color:white;
+    display: table-cell;
+    vertical-align: middle;
+    color:black;
     text-align: center;
     font-size: 1.75vw;
 }
