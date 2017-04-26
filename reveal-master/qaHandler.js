@@ -12,8 +12,10 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
             /*Stores how long to display the correct/wrong indicator when an answer is clicked*/
             this.answerTimeout = 500;
             
+            /*Stores the current PIXI Stage*/
             this.stage = stage;
             
+            /*Stores the current points*/
             this.gamestate = gState;
 
             /*Updates the question on the side pane to reflect the question associated with the grid passed to it*/
@@ -61,7 +63,8 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
                     $("#answer2").show();
                     $("#answer3").show();
                 }
-
+                
+                /*Add the current question/answers to the side pane*/
                 this.addQuestion(questiontext);
                 this.addAnswer(correct_index,correctAnswer);
                 this.addIncorrectAnswers(incorrectAnswers);
@@ -96,9 +99,8 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
             }
             /*Add a points label to the top of the screen, if one exists then it updates the current label*/
             this.addPointsLabel = function(points, update) {
-                //If this is not an update, create a new label//
                 if(!update) {
-                    //Styling for the label
+                    //If this is not an update, create a new label
                     var labelStyle = new PIXI.TextStyle({
                         fontFamily: 'Macondo, cursive',
                         fontSize: 32,
@@ -108,7 +110,9 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
                     pointslabel.x = 500;
                     pointslabel.y = 150;
                     stage.addChild(pointslabel);
+                    
                 } else {
+                    //If this is an update then
                     pointslabel.text = "Score: " + points;
                 }    
             }
@@ -118,6 +122,8 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
         this.extraQuestions = new questionAPI.APIRequester();
      
         var currentObj = this;
+        
+        /*Defines a click event for an answer div or answer header*/    
         $(".answer").click(function (event) {
             if(event.target.className == "answerHead"){
                 currentObj.checkCorrect(event.target.parentElement);
@@ -126,8 +132,6 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
             }
         });
             
-
-
         /*Check if the clicked option corresponds to the correct answer*/
         this.checkCorrect = function(item){
             var id=item.id;
@@ -135,12 +139,14 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
             var answerDiv = $("#" + id)
             
             if(answer==this.activeGrid.question.correct_answer){
+                /*Flash div with a green div to indicate answer was correct*/
                 answerDiv.css("background-image", "url(resources/CorrectAnswerButton.png)")
                 setTimeout(function(){
                     currentObj.handleCorrect(answerDiv);
                 },currentObj.answerTimeout);                
             }
             else {
+                /*Flash div with a red div to indicate answer was wrong*/
                 answerDiv.css("background-image", "url(resources/answerButton.png)")
                 setTimeout(function() {
                     currentObj.handleIncorrect(answerDiv);
@@ -148,6 +154,7 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
             }
         }
         
+        /*Function that handles what happens when a correct answer is clicked*/
         this.handleCorrect = function(answer) {
             console.log("entered correct");
             this.gamestate.addPoints(100);
@@ -156,6 +163,7 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
             this.resetPane();
         }
         
+        /*Function that handles what happens when an incorrect answer is clicked*/
         this.handleIncorrect = function(answer) {
             console.log("entered incorrect");
             this.gamestate.addPoints(-10);
@@ -173,6 +181,7 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
             this.resetPane();
         }
         
+        /*Reset the entire side pane and set the active grid to null*/
         this.resetPane = function() {
                 this.hidePaneElements();
                 this.clearPane();
@@ -180,7 +189,6 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
                 this.activeGrid = null;
                 this.isClicked= false;
             }
-        
         
         }
         

@@ -23,6 +23,8 @@ define(["jquery"], function($) {
                     resolve(currentObj.imginfo);
                 },"text");
             });
+            
+            /*Creates a new image object with the specified url and the specified name*/
             this.createImage = function(url, name){
                 var obj = new Object();
                 obj.url = url;

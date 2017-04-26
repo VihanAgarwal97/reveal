@@ -1,3 +1,4 @@
+/*All the files/frameworks/libraries we need for our app. This command associates names with file paths*/
 require.config({
     baseUrl: ".",
     paths: {
@@ -60,36 +61,56 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
     
         /*Creates a timer object*/
         var timer= new timer.Timer(stage);
-    
+        
+        /*Creates a guess box functionality object*/
         var gbFunct = new guessboxFunctionality.GuessboxFunctionality(imageloader, stage, gridSquares);
 
         /*Function that sets up the app*/
         $("document").ready(function setup(){
+            
+            /*Set height of sidepane to be the same as the canvas*/
             h = $("canvas").css("height");
             $("#sidePane").css("height",h);
-
+            
+            /*Hide all sidepane elements*/
             qah.hidePaneElements();
-
+            
+            /*Request questions from the API*/
             var questionListPromise = questionAPI.requestData();
-
+            
+            /*Read the image flat file and pick a random picture for the game*/
             imageloader.imgPromise.then(function() {
-                var imgindex=Math.floor(Math.random() * 
-                                   (imageloader.imginfo.length));
+                var imgindex=Math.floor(Math.random() * (imageloader.imginfo.length));
                 var thisImg=imageloader.imginfo[imgindex];
                 imageloader.currentImage = thisImg;
                 var url ="resources/" + thisImg.url;
                 
+                /*Add the points label to the canvas*/
                 qah.addPointsLabel(currState.points,false);
+                
+                /*Add the randomly selected picture to the page*/
                 addPicture(url);
+                
+                /*Adds the grid squares above the picture*/
                 addSquares(no_grids);
+                
+                /*Assign questions to grid squares*/
                 questionListPromise.then(function() {
                     assignQuestions();
                     qah.extraQuestions.questionList = 
                                 questionAPI.questionList;
                 });
+                
+                /*Add the guess button to the stage*/
                 addGuessButton();
+                
+                /*Add the timer to the stage*/
                 timer.addTimerToStage();
+                
+                /*Call to PIXI Animator*/
                 requestAnimationFrame(animate);
+                
+                /*Prepares the Guess Box*/
                 gbFunct.prepareGuessbox();
             });
 
@@ -159,14 +180,21 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
         }
 
         
+        //Time when first frame is called
         var last=Date.now();
+        
+        //Time since last frame
         var timeElapsed = 0;
+    
         /*Call to PIXI animator*/
         function animate(){
+            /*IF the picture hasn't been guessed correctly*/
             if(!gbFunct.pictureGuessedCorrectly) {
                 var now = Date.now();
                 timeElapsed += (now - last);
                 last = Date.now();
+                
+                /*If the time since the last frame is more than a second*/
                 if(timeElapsed>=1000){
                     timer.updateTime();
                     timeElapsed=0;

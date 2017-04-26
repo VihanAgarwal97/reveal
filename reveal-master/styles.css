@@ -1,20 +1,24 @@
+/*Styling for the entire page*/
 *{
     font-family: 'Macondo', cursive;
 }
-
+/*Styling for the body*/
 body {
     background: black;
 }
 
+/*Styling for the div that contains the PIXI Canvas and the side pane*/
 #screen{
     display: flex;
 }
 
+/*Styling for the container that holds the canvas*/
 #canvas-container {
     width:50%;
     height: auto;
 }   
 
+/*Styling for the PIXI Canvas*/
 canvas {
     width:80%;
 }
@@ -27,8 +31,7 @@ canvas {
     background: #000000;
 }
 
-
-/*Styling for the question*/
+/*Styling for the question container div*/
 #question{
     display: table;
     margin-bottom:3vw;
@@ -41,6 +44,7 @@ canvas {
     background-size: cover;
 
 }
+/*Styling for the question header text*/
 .questionHead{
     display: table-cell;
     color:white;
@@ -49,14 +53,14 @@ canvas {
     vertical-align: middle;
 }
 
-/*Styling for the answers*/
+/*Styling for the answer container div*/
 .answer{
     margin-left:auto;
     margin-right:auto;
     margin-bottom:1vw;
     border: none;
-    border-radius: 15px;
-    -moz-border-radius:15px;
+    border-radius: 10px;
+    -moz-border-radius:10px;
     width: 80%;
     height:13%;
     display: table;
@@ -64,6 +68,7 @@ canvas {
     background-size: cover;
 }
 
+/*Styling for the answer header text*/
 .answerHead{
     display: table-cell;
     vertical-align: middle;

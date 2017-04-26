@@ -50,7 +50,7 @@ define(["PIXI"], function(PIXI) {
                 timertext.text = this.minute + ":" + this.sec;
             }
             
-            /*Get time in seconds*/
+            /*Returns 3600 - (10 * Time in Seconds). It basically gives the user bonus points for guessing quicker*/
             this.getTimePoints = function() {
                 var min,second;
                 if(this.minute[0]=="0"){
@@ -64,7 +64,8 @@ define(["PIXI"], function(PIXI) {
                     second=this.sec;
                 }
                 
-                totalTime = (parseInt(min)*60)+parseInt(second);            
+                totalTime = (parseInt(min)*60)+parseInt(second);
+                
                 return 3600 - (10 * totalTime);
             }
         }
