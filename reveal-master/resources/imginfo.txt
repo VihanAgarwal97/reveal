@@ -8,3 +8,8 @@ panda.jpg$PANDA
 pizza.jpg$PIZZA
 rhino.jpg$RHINO
 straw.jpg$STRAW
+umbrella.jpg$UMBRELLA
+bottle.jpg$BOTTLE
+guitar.jpg$GUITAR
+helicopter.jpg$HELICOPTER
+plant.jpg$PLANT
