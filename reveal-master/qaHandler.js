@@ -156,17 +156,17 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
         
         /*Function that handles what happens when a correct answer is clicked*/
         this.handleCorrect = function(answer) {
-            console.log("entered correct");
-            this.gamestate.addPoints(100);
+            this.gamestate.addPoints(300);
             this.addPointsLabel(this.gamestate.points,true);
             this.stage.removeChild(this.activeGrid);
+            /* NEED TO UPDATE GRID SQUARES ARRAY IN APP.JS*/
             this.resetPane();
         }
         
         /*Function that handles what happens when an incorrect answer is clicked*/
         this.handleIncorrect = function(answer) {
             console.log("entered incorrect");
-            this.gamestate.addPoints(-10);
+            this.gamestate.addPoints(-50);
             this.addPointsLabel(this.gamestate.points,true);
                 
             if(this.extraQuestions.questionList.length == 0) {
