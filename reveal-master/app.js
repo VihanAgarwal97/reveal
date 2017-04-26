@@ -5,6 +5,7 @@ require.config({
         jquery: "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min",
         questionAPI: "questionAPI",
         imgloader: "imgloader",
+        Howler: "https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.3/howler.min",
         PIXI: "http://pixijs.download/release/pixi.min",
         qaHandler: "qaHandler",
         timer: "timer",
@@ -15,8 +16,8 @@ require.config({
     }
 });
 
-require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gamestate", "guessboxFunctionality"], 
-    function($, questionAPI, imgloader, PIXI, qaHandler, timer, gamestate, guessboxFunctionality) 
+require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gamestate", "guessboxFunctionality","Howler"], 
+    function($, questionAPI, imgloader, PIXI, qaHandler, timer, gamestate, guessboxFunctionality, Howler) 
     {
         function loadCss() {
             var link = document.createElement("link");

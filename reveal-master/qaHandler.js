@@ -20,6 +20,16 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
             
             /*Stores the current points*/
             this.gamestate = gState;
+            
+            /*Correct sound indication*/
+            this.correct_sound = new Howl({
+               src:['resources/correctSFX.wav'] 
+            });
+            
+            /*Incorrect sound indication*/
+            this.incorrect_sound = new Howl({
+               src:['resources/incorrectSFX.wav'] 
+            });
 
             /*Updates the question on the side pane to reflect the question associated with the grid passed to it*/
             this.updateQuestionPane = function(item) {
@@ -159,6 +169,7 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
         
         /*Function that handles what happens when a correct answer is clicked*/
         this.handleCorrect = function(answer) {
+            this.correct_sound.play();
             this.gamestate.addPoints(300);
             this.addPointsLabel(this.gamestate.points,true);
             this.stage.removeChild(this.activeGrid);
@@ -168,7 +179,7 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
         
         /*Function that handles what happens when an incorrect answer is clicked*/
         this.handleIncorrect = function(answer) {
-            console.log("entered incorrect");
+            this.incorrect_sound.play();
             this.gamestate.addPoints(-50);
             this.addPointsLabel(this.gamestate.points,true);
                 
