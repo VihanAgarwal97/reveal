@@ -1,0 +1,179 @@
+*{
+    font-family: 'Macondo', cursive;
+}
+
+body {
+    background: black;
+}
+
+#screen{
+    display: flex;
+}
+h1{
+    color: firebrick;
+    font-size: 80 px; 
+}
+#Sportbutton{
+    background-color: firebrick;
+    border:none;
+    color: white;
+    text-align: center;
+    display: grid;
+    font-size: 36px;
+    margin: 4px 2px;
+    border-radius: 30px;
+    width: 250 px;
+    transition-duration: 0.7s;
+}
+#Hisbutton{
+    background-color: darkorange;
+    border:none;
+    color: white;
+    text-align: center;
+    display: grid;
+    font-size: 36px;
+    margin: 4px 2px;
+    border-radius: 30px;
+    width: 250 px;
+    transition-duration: 0.7s;
+}
+#gKbutton{
+    background-color: palevioletred;
+    border:none;
+    color: white;
+    text-align: center;
+    display: grid;
+    font-size: 36px;
+    margin: 4px 2px;
+    border-radius: 30px;
+    width: 250 px;
+    transition-duration: 0.7s;
+}
+#Bookbutton{
+    background-color: darkcyan;
+    border:none;
+    color: white;
+    text-align: center;
+    display: grid;
+    font-size: 36px;
+    margin: 4px 2px;
+    border-radius: 30px;
+    width: 250 px;
+    transition-duration: 0.7s;
+}
+#Filmbutton{
+    background-color: mediumspringgreen;
+    border:none;
+    color: white;
+    text-align: center;
+    display: grid;
+    font-size: 36px;
+    margin: 4px 2px;
+    border-radius: 30px;
+    width: 250 px;
+    transition-duration: 0.7s;
+}
+#Musicbutton{
+    background-color: orchid;
+    border:none;
+    color: white;
+    text-align: center;
+    display: grid;
+    font-size: 36px;
+    margin: 4px 2px;
+    border-radius: 30px;
+    width: 250 px;
+    transition-duration: 0.7s;
+}
+#Tvbutton{
+    background-color: rebeccapurple;
+    border:none;
+    color: white;
+    text-align: center;
+    display:grid;
+    font-size: 36px;
+    margin: 4px 2px;
+    border-radius: 30px;
+    width: 250 px;
+    transition-duration: 0.7s;
+}
+#VGbutton{
+    background-color: cornflowerblue;
+    border:none;
+    color: white;
+    text-align: center;
+    display: grid;
+    font-size: 36px;
+    margin: 4px 2px;
+    border-radius: 30px;
+    width: 250 px;
+    transition-duration: 0.7s;
+}
+#Scibutton{
+    background-color: darksalmon;
+    border:none;
+    color: white;
+    text-align: center;
+    display: grid;
+    font-size: 36px;
+    margin: 4px 2px;
+    border-radius: 30px;
+    width: 250 px;
+    transition-duration: 0.7s;
+}
+#CSbutton{
+    background-color: seagreen;
+    border:none;
+    color: white;
+    text-align: center;
+    display: grid;
+    font-size: 36px;
+    margin: 4px 2px;
+    border-radius: 30px;
+    width: 250 px;
+    transition-duration: 0.7s;
+}
+#Animbutton{
+    background-color: lightskyblue;
+    border:none;
+    color: white;
+    text-align: center;
+    display: grid;
+    font-size: 36px;
+    margin: 4px 2px;
+    border-radius: 30px;
+    width: 250 px;
+    transition-duration: 0.7s;
+}
+#Geobutton{
+    background-color: gold;
+    border:none;
+    color: white;
+    text-align: center;
+    display: grid;
+    font-size: 36px;
+    border-radius: 30px;
+    width: 250 px;
+    transition-duration: 0.7s;
+}
+#Vehibutton{
+    background-color: hotpink;
+    border:none;
+    color: white;
+    text-align: center;
+    display: grid;
+    font-size: 36px;
+    margin: 4px 2px;
+    border-radius: 30px;
+    width: 250 px;
+    transition-duration: 0.7s;
+}
+a {
+    display: block;
+    text-decoration: none;
+}
+a:hover {
+    color: red;
+    background-color: red;
+    
+}
