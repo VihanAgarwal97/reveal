@@ -65,7 +65,7 @@ define(["PIXI"], function(PIXI) {
                 }
                 
                 totalTime = (parseInt(min)*60)+parseInt(second);            
-                return 3000 * Math.exp(-1 * totalTime * .05);
+                return 3600 - (10 * totalTime);
             }
         }
     }

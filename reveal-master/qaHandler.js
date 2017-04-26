@@ -47,7 +47,6 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
             }
 
 
-
             /*Adds the questions and correct answers to the question pane*/
             this.addQuestionToPane = function(questiontext, correctAnswer,incorrectAnswers,type){
                 /*Stores where the correct answer should be placed. Being picked at random*/
@@ -66,22 +65,6 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
                 this.addQuestion(questiontext);
                 this.addAnswer(correct_index,correctAnswer);
                 this.addIncorrectAnswers(incorrectAnswers);
-                
-                
-                /*Handler function for entering a div*/
-                mouseEnter = function(){
-                    $('.answer').css('font-size','2vw');
-                    $('.answer').css('color','white');
-                }
-
-                /*Handler function for leaving a div*/
-                mouseExit = function() {
-                    $('.answer').css('font-size','1.75vw');
-                    $('.answer').css('color','black');
-                }
-                
-                /*Enable answer for div*/
-                $('.answer').hover(mouseEnter, mouseExit);
 
             }
 
@@ -97,7 +80,7 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
                 var answerHead = $("<h2 class='answerHead'>"); 
                 answerHead.html(answer);
                 $("#answer"+index).append(answerHead);
-                $("#answer"+index).css("background-image", "url(resources/regAnswerButton.png)")
+                $("#answer"+index).css("background-image", "url(resources/regAnswerButton.png)");
             }
 
             /*Adds the incorrect answers to the answer divs once the correct answer has been added*/
@@ -167,7 +150,7 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
         
         this.handleCorrect = function(answer) {
             console.log("entered correct");
-            this.gamestate.addPoints(50);
+            this.gamestate.addPoints(100);
             this.addPointsLabel(this.gamestate.points,true);
             this.stage.removeChild(this.activeGrid);
             this.resetPane();

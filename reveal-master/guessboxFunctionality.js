@@ -41,7 +41,6 @@ define(["sweetalert"], function(sweetalert){
             this.handleCorrectGuess = function(boxList) {
                 this.pictureGuessedCorrectly = true;
                 swal("Nice!", "You guessed correct!", "success");
-                //this.clearBoxes(boxList);
                 this.clearStage();
             }
 

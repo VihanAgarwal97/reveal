@@ -93,12 +93,6 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
                 gbFunct.prepareGuessbox();
             });
 
-            /*questionListPromise.then(function() {
-                assignQuestions();
-                qah.extraQuestions.questionList = 
-                            questionAPI.questionList;
-            });*/
-
             //Handle height of side pane based on canvas every time the window is resized
             $(window).resize(function (){
                 h = $("canvas").css("height");
@@ -187,12 +181,13 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
         
         /*A function that ends the game and calculates the total number of points won*/
         function endGame(){
-            guesspoints = timer.getTimePoints();
-            gridpoints = gridSquares.length * 150;
-            totalpoints = guesspoints + currState.points + gridpoints;
+            guesspoints = Math.ceil(timer.getTimePoints());
+            gridpoints = gridSquares.length * 200;
+            gamepoints = Math.ceil(currState.points);
+            totalpoints = guesspoints + gamepoints + gridpoints;
             qah.hidePaneElements();
 
-            swal('Game Over! You got '+Math.ceil(totalpoints)+ ' points!');
+            swal('Game Over!\n Game Points:  +' + gamepoints +"\n Bonus Time Points:  +" + guesspoints + '\n Bonus Grid Points:  +' + gridpoints + '\n Total Points:  '  + totalpoints);
         }
         
         /*Defines a function for a grid square when clicked*/
