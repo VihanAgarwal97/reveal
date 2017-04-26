@@ -102,8 +102,8 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
                                 questionAPI.questionList;
                 });
                 
-                /*Add the guess button to the stage*/
-                addGuessButton();
+                /*Link the guessbutton to the guessbox functionality object*/
+                gbFunct.guessbox = $("#guessbutton");
                 
                 /*Add the timer to the stage*/
                 timer.addTimerToStage();
@@ -120,19 +120,17 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
                 h = $("canvas").css("height");
                 $("#sidePane").css("height",h);
             });
+            
+            /*Set up the guess input box to trigger the button on "Enter"*/
+            $("#guessinp").keypress(function(event){
+                //Was enter clicked? If so, trigger the hidden button
+                if(event.keyCode == 13){
+                    $("#guessbutton").click();
+                }
+            });
+            
         });
-
-        /*Adds the guess button to the pixi canvas*/
-        function addGuessButton() {
-            var but_texture = new PIXI.Texture.fromImage("resources/Magnifying_Glass.png");
-            var guessbutton = new PIXI.Sprite(but_texture);
-            guessbutton.x = 300;
-            guessbutton.y = 50;
-            guessbutton.interactive = true;
-            gbFunct.guessbox = guessbutton;
-            stage.addChild(guessbutton);
-        }
-
+    
         /*Adds a picture that needs to be guessed to the background*/
          function addPicture(picture){
             var bg_texture = new PIXI.Texture.fromImage(picture);
@@ -216,8 +214,8 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
             gamepoints = Math.ceil(currState.points);
             totalpoints = guesspoints + gamepoints + gridpoints;
             qah.hidePaneElements();
-
-            swal('Game Over!\n Game Points:  +' + gamepoints +"\n Bonus Time Points:  +" + guesspoints + '\n Bonus Grid Points:  +' + gridpoints + '\n Total Points:  '  + totalpoints);
+            $("#guessinp").remove();
+            swal('Game Over! You Win! \n Game Points:  +' + gamepoints +"\n Bonus Time Points:  +" + guesspoints + '\n Bonus Grid Points:  +' + gridpoints + '\n Total Points:  '  + totalpoints);
         }
         
         /*Defines a function for a grid square when clicked*/

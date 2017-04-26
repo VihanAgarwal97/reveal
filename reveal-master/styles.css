@@ -7,6 +7,17 @@ body {
     background: black;
 }
 
+/*Styling for the input box*/
+#guessinp {
+    position:absolute;
+    margin: 0px;
+    margin-top:4%;
+    margin-left:4.75%;
+    width:30%;
+    font-size: 1.5vw;
+    text-align: center;
+}
+
 /*Styling for the div that contains the PIXI Canvas and the side pane*/
 #screen{
     display: flex;

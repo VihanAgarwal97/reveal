@@ -9,34 +9,29 @@ define(["sweetalert"], function(sweetalert){
             this.pictureGuessedCorrectly = false;
             this.prepareGuessbox = function() {
                 var currentObj = this;
+                
                 this.guessbox.on("click", function() {
                     if(!this.pictureGuessedCorrectly) {
                         var answer = currentObj.imgloader.currentImage.name.toLowerCase().trim();
-                        swal({
-                              title: "Guess the picture (" + answer.length + " letters)",
-                              type: "input",
-                              showCancelButton: true,
-                              closeOnConfirm: false,
-                              animation: "slide-from-top",
-                              inputPlaceholder: "Enter your guess here..."
-                            },
-                            function(inputValue){
-                              if (inputValue === false) return false;
-                              if (inputValue === "") return false;
-                              guess = inputValue.toLowerCase();
-                              var correctAnswer = guess.search(answer);
-                              if (correctAnswer!= -1 ) {
+                        var userGuess = $("#guessinp").val();
+                        
+                        if(!userGuess){
+                            swal("Oops", "Please make a valid guess","error");
+                        } else {
+                            guess = userGuess.toLowerCase();
+                            var correctAnswer = guess.search(answer);
+                            console.log(guess);
+                            if (correctAnswer!= -1 ) {
                                 currentObj.handleCorrectGuess();
-                              }else {
+                            }else {
                                 currentObj.handleIncorrectGuess();
-                              }
-                            });
+                            }
+                        }
+                              
                     } else {
                         swal("Oops", "You have already guessed the picture","error");
                     }
-                });
-
-            }
+            });
 
             this.handleCorrectGuess = function(boxList) {
                 this.pictureGuessedCorrectly = true;
@@ -57,4 +52,5 @@ define(["sweetalert"], function(sweetalert){
             }
         }
     }
+}
 });
