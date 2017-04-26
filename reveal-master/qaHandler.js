@@ -1,13 +1,16 @@
 define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, PIXI, questionAPI) 
 {
     return {
-        QAHandler: function(stage, gState) {
+        QAHandler: function(stage, gState, noOfGrids) {
             
             /*Stores the currently selected grid*/
             this.activeGrid;
             
             /*Stores the points label*/
             this.pointslabel;
+            
+            /*Stores how many grid squares are unanswered*/
+            this.unansweredgrids = noOfGrids;
             
             /*Stores how long to display the correct/wrong indicator when an answer is clicked*/
             this.answerTimeout = 500;
@@ -159,7 +162,7 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
             this.gamestate.addPoints(300);
             this.addPointsLabel(this.gamestate.points,true);
             this.stage.removeChild(this.activeGrid);
-            /* NEED TO UPDATE GRID SQUARES ARRAY IN APP.JS*/
+            this.unansweredgrids -= 1;
             this.resetPane();
         }
         

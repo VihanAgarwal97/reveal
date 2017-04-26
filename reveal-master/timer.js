@@ -66,7 +66,11 @@ define(["PIXI"], function(PIXI) {
                 
                 totalTime = (parseInt(min)*60)+parseInt(second);
                 
-                return 3600 - (10 * totalTime);
+                timepoints = 3600 - (10 * totalTime);
+                if(timepoints<=0) {
+                    timepoints=0;
+                }
+                return timepoints;
             }
         }
     }

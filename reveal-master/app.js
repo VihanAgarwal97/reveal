@@ -57,7 +57,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
         var currState = new gamestate.GameState();
 
         /*Creates an object that handles questions and answers*/
-        var qah = new qaHandler.QAHandler(stage, currState); 
+        var qah = new qaHandler.QAHandler(stage, currState, no_grids); 
     
         /*Creates a timer object*/
         var timer= new timer.Timer(stage);
@@ -210,8 +210,8 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
         /*A function that ends the game and calculates the total number of points won*/
         function endGame(){
             guesspoints = Math.ceil(timer.getTimePoints());
-            console.log(gridSquares.length)
-            gridpoints = gridSquares.length * 200;
+            console.log(qah.unansweredgrids);
+            gridpoints = qah.unansweredgrids * 200;
             gamepoints = Math.ceil(currState.points);
             totalpoints = guesspoints + gamepoints + gridpoints;
             qah.hidePaneElements();
