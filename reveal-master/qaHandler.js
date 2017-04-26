@@ -13,7 +13,7 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
             this.unansweredgrids = noOfGrids;
             
             /*Stores how long to display the correct/wrong indicator when an answer is clicked*/
-            this.answerTimeout = 500;
+            this.answerTimeout = 700;
             
             /*Stores the current PIXI Stage*/
             this.stage = stage;
@@ -153,14 +153,16 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
             
             if(answer==this.activeGrid.question.correct_answer){
                 /*Flash div with a green div to indicate answer was correct*/
-                answerDiv.css("background-image", "url(resources/CorrectAnswerButton.png)")
+                answerDiv.css("background-image", "url(resources/CorrectAnswerButton.png)");
+                this.correct_sound.play();
                 setTimeout(function(){
                     currentObj.handleCorrect(answerDiv);
                 },currentObj.answerTimeout);                
             }
             else {
                 /*Flash div with a red div to indicate answer was wrong*/
-                answerDiv.css("background-image", "url(resources/answerButton.png)")
+                answerDiv.css("background-image", "url(resources/answerButton.png)");
+                this.incorrect_sound.play();
                 setTimeout(function() {
                     currentObj.handleIncorrect(answerDiv);
                 },currentObj.answerTimeout);               
@@ -169,7 +171,6 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
         
         /*Function that handles what happens when a correct answer is clicked*/
         this.handleCorrect = function(answer) {
-            this.correct_sound.play();
             this.gamestate.addPoints(300);
             this.addPointsLabel(this.gamestate.points,true);
             this.stage.removeChild(this.activeGrid);
@@ -179,7 +180,6 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
         
         /*Function that handles what happens when an incorrect answer is clicked*/
         this.handleIncorrect = function(answer) {
-            this.incorrect_sound.play();
             this.gamestate.addPoints(-50);
             this.addPointsLabel(this.gamestate.points,true);
                 
