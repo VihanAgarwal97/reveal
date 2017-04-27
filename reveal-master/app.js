@@ -215,7 +215,15 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
             totalpoints = guesspoints + gamepoints + gridpoints;
             qah.hidePaneElements();
             $("#guessinp").remove();
-            swal('Game Over! You Win! \n Game Points:  +' + gamepoints +"\n Bonus Time Points:  +" + guesspoints + '\n Bonus Grid Points:  +' + gridpoints + '\n Total Points:  '  + totalpoints);
+//            swal('Game Over! You Win! \n Game Points:  +' + gamepoints +"\n Bonus Time Points:  +" + guesspoints + '\n Bonus Grid Points:  +' + gridpoints + '\n Total Points:  '  + totalpoints);
+            
+            swal({
+              title: 'Game Over! You WIN!',  
+              text: "Game Score: " + gamepoints + "\n" +
+                    "Bonus Time Score: +" + timepoints + "\n" +
+                    "Bonus Grid Score ( x"+qah.unansweredgrids+" ): +" + gridpoints + "\n" +
+                    "Total Score: " + totalpoints,
+            });
         }
         
         /*Defines a function for a grid square when clicked*/

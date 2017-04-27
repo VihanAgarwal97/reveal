@@ -202,7 +202,7 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
                 this.activeGrid.texture = new PIXI.Texture.fromImage("resources/quizbox150.png");
                 this.activeGrid = null;
                 this.isClicked= false;
-            }
+        }
         
         }
         
