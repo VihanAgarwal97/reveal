@@ -6,7 +6,12 @@ define(["sweetalert"], function(sweetalert){
             this.stage = stage;
             this.guessbox = null;
             this.boxList = boxList;
+            
+            /*Checks to see if the user already correctly guessed the picture*/
             this.pictureGuessedCorrectly = false;
+            
+            /*Makes the text entry field work and sets the placeholder text. 
+            After 'enter' is pressed, the handle guess functions start.*/
             this.prepareGuessbox = function() {
                 var currentObj = this;
                 var answer = this.imgloader.currentImage.name.toLowerCase().trim();
@@ -35,16 +40,19 @@ define(["sweetalert"], function(sweetalert){
                     }
             });
 
+            /*If the user's answer is correct, this ends the game*/
             this.handleCorrectGuess = function(boxList) {
                 this.pictureGuessedCorrectly = true;
                 swal("Nice!", "You guessed correct!", "success");
                 this.clearStage();
             }
 
+            /*If the user's answer is incorrect, this gives an indication for it.*/
             this.handleIncorrectGuess = function() {
                 swal("Oops!","You guessed wrong!","error");
             }
 
+            /*Removes all graphical elements from the app's main stage*/
             this.clearStage = function() {
                 for (var i = stage.children.length - 1; i >= 0; i--) {
                     if(!(stage.children[i] in imgloader.imginfo)) {
