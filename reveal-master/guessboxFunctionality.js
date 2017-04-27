@@ -9,10 +9,12 @@ define(["sweetalert"], function(sweetalert){
             this.pictureGuessedCorrectly = false;
             this.prepareGuessbox = function() {
                 var currentObj = this;
+                var answer = this.imgloader.currentImage.name.toLowerCase().trim();
+                var letterString = "Guess the picture (" + answer.length + " letters)";
+                $("#guessinp").attr('placeholder', letterString);
                 
                 this.guessbox.on("click", function() {
                     if(!this.pictureGuessedCorrectly) {
-                        var answer = currentObj.imgloader.currentImage.name.toLowerCase().trim();
                         var userGuess = $("#guessinp").val();
                         
                         if(!userGuess){
