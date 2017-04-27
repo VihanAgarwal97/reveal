@@ -30,7 +30,6 @@ define(["jquery"], function($) {
                     dataType: 'json',
                     data: 
                     {
-                        difficulty: 'easy',
                         category: parentObj.category,
                         amount: parentObj.questionNum
                     },
