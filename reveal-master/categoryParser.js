@@ -4,7 +4,7 @@ define(["jquery"], function($) {
         
         CategoryParser: function() {
             
-            this.categoryList = new Object();
+            this.categoryList = new Array();
             
             var currentObj = this;
             this.categoryPromise = new Promise(function(resolve, reject) {
