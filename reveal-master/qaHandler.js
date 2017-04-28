@@ -183,8 +183,6 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
         
         /*Function that handles what happens when an incorrect answer is clicked*/
         this.handleIncorrect = function(answer) {
-            console.log(this.extraQuestions.questionList);
-            console.log(this.extraQuestions.questionList.length);
             this.gamestate.addPoints(-50);
             this.addPointsLabel(this.gamestate.points,true);
                 
