@@ -34,6 +34,7 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
             /*Updates the question on the side pane to reflect the question associated with the grid passed to it*/
             this.updateQuestionPane = function(item) {
                 this.activeGrid = item;
+                this.activeGrid.clicked = false;
                 var questiontext = item.question.question;
                 var correctAnswer = item.question.correct_answer;
                 var incorrectAnswers = item.question.incorrect_answers;
@@ -149,9 +150,10 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
         this.checkCorrect = function(item){
             var id=item.id;
             var answer=$("#"+id+" .answerHead").html();
-            var answerDiv = $("#" + id)
+            var answerDiv = $("#" + id);
             
-            if(answer==this.activeGrid.question.correct_answer){
+            if(answer==this.activeGrid.question.correct_answer && !(this.activeGrid.clicked)){
+                this.activeGrid.clicked = true;
                 /*Flash div with a green div to indicate answer was correct*/
                 answerDiv.css("background-image", "url(resources/CorrectAnswerButton.png)");
                 this.correct_sound.play();
@@ -159,7 +161,8 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
                     currentObj.handleCorrect(answerDiv);
                 },currentObj.answerTimeout);                
             }
-            else {
+            else if(!(this.activeGrid.clicked)) {
+                this.activeGrid.clicked = true;
                 /*Flash div with a red div to indicate answer was wrong*/
                 answerDiv.css("background-image", "url(resources/answerButton.png)");
                 this.incorrect_sound.play();
@@ -176,6 +179,7 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
             this.stage.removeChild(this.activeGrid);
             this.unansweredgrids -= 1;
             this.resetPane();
+            this.activeGrid.clicked = false;
         }
         
         /*Function that handles what happens when an incorrect answer is clicked*/
@@ -185,8 +189,10 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
                 
             if(this.extraQuestions.questionList.length == 0) {
                 var extraQuestionsPromise = this.extraQuestions.requestData();
+                var parentObj = this;
                 extraQuestionsPromise.then(function() {
                     console.log("Refreshed questions.");
+                    parentObj.activeGrid.question = parentObj.extraQuestions.questionList.pop();
                 });
             }
             else {

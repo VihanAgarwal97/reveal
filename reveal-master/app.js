@@ -210,8 +210,8 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
                 renderer.render(stage);
                 requestAnimationFrame(animate);
             } else {
-                renderer.render(stage);
                 endGame();
+                renderer.render(stage);
             } 
         }
         
@@ -221,10 +221,26 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
             gridpoints = qah.unansweredgrids * 200;
             gamepoints = Math.ceil(currState.points);
             totalpoints = guesspoints + gamepoints + gridpoints;
-            qah.hidePaneElements();
-            $("#guessinp").remove();
+            qah.addPointsLabel(totalpoints, true);
+            clearGameAssets();
             swal('Game Over! You Win! \n Game Points:  +' + gamepoints +"\n Bonus Time Points:  +" + guesspoints + '\n Bonus Grid Points:  +' + gridpoints + '\n Total Points:  '  + totalpoints);
 
+        }
+    
+        /*Clears game images from the board*/
+        function clearGameAssets() {
+            qah.hidePaneElements();
+            $("#guessinp").remove();
+            var i = 0;
+            while(stage.children[i]) {
+                if(stage.children[i]._texture.baseTexture.imageUrl == "resources/quizbox150.png"
+                || stage.children[i]._texture.baseTexture.imageUrl == "resources/selectedQuizBox150.png") {
+                    stage.removeChildAt(i);
+                }
+                else {
+                    i++;
+                }
+            }
         }
         
         /*Defines a function for a grid square when clicked*/

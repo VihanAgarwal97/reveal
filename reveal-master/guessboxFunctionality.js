@@ -44,7 +44,7 @@ define(["sweetalert"], function(sweetalert){
             this.handleCorrectGuess = function(boxList) {
                 this.pictureGuessedCorrectly = true;
                 swal("Nice!", "You guessed correct!", "success");
-                this.clearStage();
+                //this.clearStage();
             }
 
             /*If the user's answer is incorrect, this gives an indication for it.*/
@@ -53,13 +53,13 @@ define(["sweetalert"], function(sweetalert){
             }
 
             /*Removes all graphical elements from the app's main stage*/
-            this.clearStage = function() {
+            /*this.clearStage = function() {
                 for (var i = stage.children.length - 1; i >= 0; i--) {
                     if(!(stage.children[i] in imgloader.imginfo)) {
                         stage.removeChild(stage.children[i]);
                     }
                 }
-            }
+            }*/
         }
     }
 }
