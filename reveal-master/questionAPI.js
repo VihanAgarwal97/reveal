@@ -4,15 +4,21 @@ define(["jquery"], function($) {
     return {
     APIRequester: function(url="https://opentdb.com/api.php", questionNum=30) {
         this.url = url;
+        
+        /*Sets number of requested questions*/
         this.questionNum = questionNum;
+        
         this.questions_seen = new Array();
         this.questionList = new Array();
+        
+        /*Each category in the API has a code. 0 is all*/
         this.category = 0;
         
         this.setCategory = function(category) {
             this.category = category;
         }
         
+        /*Request data from the API asynchroniously. Returns a promise*/
         this.requestData = function() {
             var parentObj = this;
             var dataPromise = new Promise(function(resolve, reject) {
@@ -24,7 +30,6 @@ define(["jquery"], function($) {
                     dataType: 'json',
                     data: 
                     {
-                        difficulty: 'easy',
                         category: parentObj.category,
                         amount: parentObj.questionNum
                     },

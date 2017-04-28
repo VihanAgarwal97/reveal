@@ -50,6 +50,9 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
 
         /*Create a new questionAPI object*/
         var questionAPI = new questionAPI.APIRequester();
+    
+        /*Current category*/
+        var category = window.location.hash.substring(1);
 
         /*Create a new ImgLoader object*/
         var imageloader = new imgloader.Imgloader();
@@ -68,6 +71,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
 
         /*Function that sets up the app*/
         $("document").ready(function setup(){
+            questionAPI.category = category;
             
             /*Set height of sidepane to be the same as the canvas*/
             h = $("canvas").css("height");
@@ -177,7 +181,11 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
                 }
             });
         }
+        var sound = new Howl({
+          src: ['resources/Primavera.wav']
+        });
 
+        sound.play();
         
         //Time when first frame is called
         var last=Date.now();
@@ -215,15 +223,8 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
             totalpoints = guesspoints + gamepoints + gridpoints;
             qah.hidePaneElements();
             $("#guessinp").remove();
-//            swal('Game Over! You Win! \n Game Points:  +' + gamepoints +"\n Bonus Time Points:  +" + guesspoints + '\n Bonus Grid Points:  +' + gridpoints + '\n Total Points:  '  + totalpoints);
-            
-            swal({
-              title: 'Game Over! You WIN!',  
-              text: "Game Score: " + gamepoints + "\n" +
-                    "Bonus Time Score: +" + timepoints + "\n" +
-                    "Bonus Grid Score ( x"+qah.unansweredgrids+" ): +" + gridpoints + "\n" +
-                    "Total Score: " + totalpoints,
-            });
+            swal('Game Over! You Win! \n Game Points:  +' + gamepoints +"\n Bonus Time Points:  +" + guesspoints + '\n Bonus Grid Points:  +' + gridpoints + '\n Total Points:  '  + totalpoints);
+
         }
         
         /*Defines a function for a grid square when clicked*/
