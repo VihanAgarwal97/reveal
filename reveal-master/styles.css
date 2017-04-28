@@ -62,9 +62,10 @@ canvas {
     display: table-cell;
     color:inherit;
     text-align: center;
-    padding-right: 10px;
-    padding-left: 10px;
-    font-size: 1.35vw;
+    justify-content: center;
+    padding-right: 20px;
+    padding-left: 20px;
+    font-size: 1.5vw;
     vertical-align: middle;
 }
 
