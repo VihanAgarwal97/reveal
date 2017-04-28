@@ -104,6 +104,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
                     assignQuestions();
                     qah.extraQuestions.questionList = 
                                 questionAPI.questionList;
+                    qah.extraQuestions.category = category;
                 });
                 
                 /*Link the guessbutton to the guessbox functionality object*/

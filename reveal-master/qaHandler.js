@@ -183,20 +183,21 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
         
         /*Function that handles what happens when an incorrect answer is clicked*/
         this.handleIncorrect = function(answer) {
+            console.log(this.extraQuestions.questionList);
+            console.log(this.extraQuestions.questionList.length);
             this.gamestate.addPoints(-50);
             this.addPointsLabel(this.gamestate.points,true);
                 
-            if(this.extraQuestions.questionList.length == 0) {
+            // If questionList.length is one or zero, it risks assigning no questions to a 
+            // question pane, and makes the game unplayable.
+            if(this.extraQuestions.questionList.length == 2) {
                 var extraQuestionsPromise = this.extraQuestions.requestData();
                 var parentObj = this;
                 extraQuestionsPromise.then(function() {
                     console.log("Refreshed questions.");
-                    parentObj.activeGrid.question = parentObj.extraQuestions.questionList.pop();
                 });
             }
-            else {
-                this.activeGrid.question = this.extraQuestions.questionList.pop();
-            }
+            this.activeGrid.question = this.extraQuestions.questionList.pop();
             this.resetPane();
         }
         
