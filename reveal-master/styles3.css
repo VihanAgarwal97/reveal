@@ -14,7 +14,7 @@ h1{
     font-size: 80 px; 
 }
 .button{
-    background-color: lightcoral;
+    background-color: firebrick;
     border:none;
     color: white;
     text-align: center;
@@ -24,6 +24,11 @@ h1{
     border-radius: 30px;
     width: 250 px;
     transition-duration: 0.7s;
+}
+.button:hover{
+    background-color: green;
+    box-shadow: 0 5px #ffffff;
+    transform: translateY(4px);
 }
 /*#Sportbutton{
     background-color: firebrick;
@@ -185,6 +190,5 @@ a {
     text-decoration: none;
 }
 a:hover {
-    background-color: lightgreen;
-    
+    background-color: green;
 }
