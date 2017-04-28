@@ -181,6 +181,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
                 }
             });
         }
+        
         var sound = new Howl({
           src: ['resources/Primavera.wav']
         });
@@ -217,7 +218,6 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
         /*A function that ends the game and calculates the total number of points won*/
         function endGame(){
             guesspoints = Math.ceil(timer.getTimePoints());
-            console.log(qah.unansweredgrids);
             gridpoints = qah.unansweredgrids * 200;
             gamepoints = Math.ceil(currState.points);
             totalpoints = guesspoints + gamepoints + gridpoints;

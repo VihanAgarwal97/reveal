@@ -3,6 +3,7 @@ require.config({
     paths: {
         Howler: "https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.3/howler.min"}
 });
+
 require(["Howler"]), 
     function(Howler) 
     {
@@ -10,8 +11,8 @@ require(["Howler"]),
             src: ['resources/Primavera.wav']
         });
         sound.play();
-    
 }
+
 function showInstructions(){
     /*swal({
         title: "Instructions!",
