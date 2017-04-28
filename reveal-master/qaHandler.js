@@ -179,7 +179,6 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
             this.stage.removeChild(this.activeGrid);
             this.unansweredgrids -= 1;
             this.resetPane();
-            this.activeGrid.clicked = false;
         }
         
         /*Function that handles what happens when an incorrect answer is clicked*/
