@@ -2,7 +2,7 @@
 
 define(["jquery"], function($) {
     return {
-    APIRequester: function(url="https://opentdb.com/api.php", questionNum=30) {
+    APIRequester: function(url="https://opentdb.com/api.php", questionNum=50) {
         this.url = url;
         
         /*Sets number of requested questions*/

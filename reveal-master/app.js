@@ -198,7 +198,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
         /*Call to PIXI animator*/
         function animate(){
             /*IF the picture hasn't been guessed correctly*/
-            if(!gbFunct.pictureGuessedCorrectly) {
+            if(!gbFunct.pictureGuessedCorrectly && qah.unansweredgrids > 0) {
                 var now = Date.now();
                 timeElapsed += (now - last);
                 last = Date.now();
