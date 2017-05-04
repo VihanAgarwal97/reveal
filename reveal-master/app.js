@@ -90,7 +90,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
                 var imgindex=Math.floor(Math.random() * (imageloader.imginfo.length));
                 var thisImg=imageloader.imginfo[imgindex];
                 imageloader.currentImage = thisImg;
-                var url ="resources/" + thisImg.url;
+                var url ="resources/images/" + thisImg.url;
                 
                 /*Add the points label to the canvas*/
                 qah.addPointsLabel(currState.points,false);
@@ -164,7 +164,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
 
         /*Creates a grid square on the screen*/
         function createGridSquare(id,localxPos, localyPos){
-            var grid1_texture = new PIXI.Texture.fromImage("resources/quizbox150.png");
+            var grid1_texture = new PIXI.Texture.fromImage("resources/util/quizbox150.png");
             var grid1 = new PIXI.Sprite(grid1_texture);
             grid1.position.x = localxPos;
             grid1.position.y = localyPos;
@@ -186,7 +186,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
         }
         
         var sound = new Howl({
-          src: ['resources/Primavera.wav'],
+          src: ['resources/sounds/Primavera.wav'],
           volume: .5,
           loop:true,
         });
@@ -233,15 +233,15 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
                 title: "Dare To Play Again",
                 text: ('You Win! You have bested the Riddler again, next time it will not be as easy! \n Game Points:  +' + gamepoints + "\n Bonus Time Points:  +" + guesspoints + '\n Bonus Grid Points:  +' + gridpoints + '\n Total Points:  '  + totalpoints),
                 confirmButtonText: "Yes, that was easy!",
-                imageUrl: "resources/detectivecopy.png",
+                imageUrl: "resources/util/detectivecopy.png",
                 showCancelButton: true,
                 cancelButtonText: "No, I don't want to test my luck"},
                  //function to link to start page and categories page respectivley
                 function(isConfirm){
                     if (isConfirm){
-                        window.location.href= 'Categories.html';
+                        window.location.href= 'categorypage.html';
                     }else{
-                        window.location.href = 'startpage.html';
+                        window.location.href = 'index.html';
                     }
             });
         }
@@ -251,27 +251,26 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
             $("#guessinp").remove();
             var i = 0;
             while(stage.children[i]) {
-                if(stage.children[i]._texture.baseTexture.imageUrl == "resources/quizbox150.png"
-                || stage.children[i]._texture.baseTexture.imageUrl == "resources/selectedQuizBox150.png") {
+                if(stage.children[i]._texture.baseTexture.imageUrl == "resources/util/quizbox150.png"
+                || stage.children[i]._texture.baseTexture.imageUrl == "resources/util/selectedQuizBox150.png") {
                     stage.removeChildAt(i);
                 }
                 else {
                     i++;
                 }
             }
-            //$("#restartButton").toggle();
         }
         
         /*Defines a function for a grid square when clicked*/
         function clickEvent_grid(){
             if(qah.isClicked) {
-                qah.activeGrid.texture = new PIXI.Texture.fromImage("resources/quizbox150.png");
+                qah.activeGrid.texture = new PIXI.Texture.fromImage("resources/util/quizbox150.png");
             }
             if(questionAPI.questionList.length != 0) {
                 qah.updateQuestionPane(this);
             }
             qah.showPaneElements();
-            this.texture = new PIXI.Texture.fromImage("resources/selectedQuizBox150.png");
+            this.texture = new PIXI.Texture.fromImage("resources/util/selectedQuizBox150.png");
             qah.isClicked = true;
         }
 
@@ -282,7 +281,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
         function mouseEnter_grid(){
             if(this!=qah.activeGrid) {
                 thisTexture = this.texture;
-                this.texture = new PIXI.Texture.fromImage("resources/selectedQuizBox150.png");
+                this.texture = new PIXI.Texture.fromImage("resources/util/selectedQuizBox150.png");
             }  
         }
 

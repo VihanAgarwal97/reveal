@@ -26,7 +26,6 @@ define(["sweetalert"], function(sweetalert){
                         } else {
                             guess = userGuess.toLowerCase();
                             var correctAnswer = guess.search(answer);
-                            console.log(guess);
                             if (correctAnswer!= -1 ) {
                                 currentObj.handleCorrectGuess();
                             }else {
@@ -50,18 +49,10 @@ define(["sweetalert"], function(sweetalert){
                   title: "WRONG!",
                   text: "Are you really a detective?",
                     confirmButtonText: "Of course I am! Just wait!",
-                  imageUrl: "resources/Villian2.png"
+                  imageUrl: "resources/util/Villian2.png"
                 });
             }
 
-            /*Removes all graphical elements from the app's main stage*/
-            /*this.clearStage = function() {
-                for (var i = stage.children.length - 1; i >= 0; i--) {
-                    if(!(stage.children[i] in imgloader.imginfo)) {
-                        stage.removeChild(stage.children[i]);
-                    }
-                }
-            }*/
         }
     }
 }

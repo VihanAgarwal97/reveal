@@ -1,0 +1,44 @@
+*{
+    font-family: 'Macondo', cursive;
+}
+#screen{
+    display: flex;
+}
+
+body {
+    background-color: black;
+}
+
+h1{
+    color: firebrick;
+    font-stretch: expanded;
+    font-size: 5vw;
+    text-align:center;
+    margin-top: 20%;
+}
+
+#helpButton {
+    margin-left: 5% !important;
+}
+
+.mainButton {
+    background-color: firebrick;
+    border: none;
+    color: white;
+    margin-left: 35%;
+    text-align: center;
+    font-size: 5vw;
+    border-radius: 1.5vw;
+    transition-duration: 0.7s;
+}
+
+.mainButton:hover{
+    background-color: orangered;
+    box-shadow: 0 5px #ffffff;
+}
+.mainButton:active {
+  background-color: orangered;
+  box-shadow: 0 5px #ffffff;
+  transform: translateY(4px);
+}
+

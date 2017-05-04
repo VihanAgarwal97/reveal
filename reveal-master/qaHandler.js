@@ -23,13 +23,13 @@ define(["jquery", "PIXI", "questionAPI"], function($, PIXI, questionAPI)
             
             /*Correct sound indication*/
             this.correct_sound = new Howl({
-               src:['resources/correctSFX.wav'],
+               src:['resources/sounds/correctSFX.wav'],
                 volume: 1,
             });
             
             /*Incorrect sound indication*/
             this.incorrect_sound = new Howl({
-               src:['resources/incorrectSFX.wav'],
+               src:['resources/sounds/incorrectSFX.wav'],
                 volume: 1.5,
             });
 
@@ -99,7 +99,7 @@ define(["jquery", "PIXI", "questionAPI"], function($, PIXI, questionAPI)
                 var answerHead = $("<h2 class='answerHead'>"); 
                 answerHead.html(answer);
                 $("#answer"+index).append(answerHead);
-                $("#answer"+index).css("background-image", "url(resources/regAnswerButton.png)");
+                $("#answer"+index).css("background-image", "url(resources/util/regAnswerButton.png)");
             }
 
             /*Adds the incorrect answers to the answer divs once the correct answer has been added*/
@@ -157,7 +157,7 @@ define(["jquery", "PIXI", "questionAPI"], function($, PIXI, questionAPI)
             if(answer==this.activeGrid.question.correct_answer && !(this.activeGrid.clicked)){
                 this.activeGrid.clicked = true;
                 /*Flash div with a green div to indicate answer was correct*/
-                answerDiv.css("background-image", "url(resources/CorrectAnswerButton.png)");
+                answerDiv.css("background-image", "url(resources/util/CorrectAnswerButton.png)");
                 this.correct_sound.play();
                 setTimeout(function(){
                     currentObj.handleCorrect(answerDiv);
@@ -166,7 +166,7 @@ define(["jquery", "PIXI", "questionAPI"], function($, PIXI, questionAPI)
             else if(!(this.activeGrid.clicked)) {
                 this.activeGrid.clicked = true;
                 /*Flash div with a red div to indicate answer was wrong*/
-                answerDiv.css("background-image", "url(resources/answerButton.png)");
+                answerDiv.css("background-image", "url(resources/util/answerButton.png)");
                 this.incorrect_sound.play();
                 setTimeout(function() {
                     currentObj.handleIncorrect(answerDiv);
@@ -187,7 +187,6 @@ define(["jquery", "PIXI", "questionAPI"], function($, PIXI, questionAPI)
         this.handleIncorrect = function(answer) {
             this.gamestate.addPoints(-50);
             this.addPointsLabel(this.gamestate.points,true);
-                
             // If questionList.length is one or zero, it risks assigning no questions to a 
             // question pane, and makes the game unplayable.
             if(this.extraQuestions.questionList.length == 2) {
@@ -205,7 +204,7 @@ define(["jquery", "PIXI", "questionAPI"], function($, PIXI, questionAPI)
         this.resetPane = function() {
                 this.hidePaneElements();
                 this.clearPane();
-                this.activeGrid.texture = new PIXI.Texture.fromImage("resources/quizbox150.png");
+                this.activeGrid.texture = new PIXI.Texture.fromImage("resources/util/quizbox150.png");
                 this.activeGrid = null;
                 this.isClicked= false;
         }

@@ -9,7 +9,7 @@ define(["jquery"], function($) {
             /*Reads a local text file that contains info about each image, creates an image object and stores it in imginfo*/
             var currentObj = this;
             this.imgPromise = new Promise(function(resolve, reject) {
-                $.get("resources/imginfo.txt", function(data) {
+                $.get("resources/util/imginfo.txt", function(data) {
 
                     var lines=data.split("\n");
 

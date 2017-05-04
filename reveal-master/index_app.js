@@ -12,13 +12,13 @@ require(["Howler", "sweetalert2", "jquery"],
     function(Howler,sweetalert2,$) 
     {
         var sound = new Howler.Howl({
-            src: ['resources/Primavera.wav']
+            src: ['resources/sounds/Primavera.wav']
         });
         sound.play();
     
     $("document").ready(function setup(){
         
-        $(".helpButton").click(function() {
+        $("#helpButton").click(function() {
             const swal = require('sweetalert2');
             swal.setDefaults({
               confirmButtonText: 'Next &rarr;',
@@ -29,21 +29,21 @@ require(["Howler", "sweetalert2", "jquery"],
                   {
                     title: "Welcome Detective J.Query",
                     text: 'We finally meet! I am the Require Riddler and I have hidden pictures your city finds most valubale. The only way to recover the images is by answering my tricky questions. You will have to use your knowledge on the category of your choice, so pick wisely... ',
-                    imageUrl: "resources/Villian2.png"
+                    imageUrl: "resources/util/Villian2.png"
                   },
                 {
                     title: 'In order to make it a fair fight, here is how to play:',
                     text:'There are 16 questions for you to answer in order to reveal parts of the picture',
-                    imageUrl: 'resources/quizBox150.png'},
+                    imageUrl: 'resources/util/quizBox150.png'},
                 {
                     title:'Answer the Question, Reveal Part of the Pic',
                     text: "Correct answer: +300 pts Incorrect answer: -50 pts",
-                    imageUrl: "resources/mg.png"
+                    imageUrl: "resources/util/mg.png"
                 },
                 {
                     title: "Guess the picture at any point in game",
                     text: "When you think you have solved my puzzle, type your guess in the text field above the grid! Final score is determined by amount of correct questions and the time it took to figure out the picture",
-                    imageUrl: "resources/gamescreenshot copy.png"
+                    imageUrl: "resources/util/gamescreenshot copy.png"
                 },
             ]
 
@@ -54,7 +54,7 @@ require(["Howler", "sweetalert2", "jquery"],
               swal({
                   //the last modal page that will close pop up 
                 title: 'Good Luck Detective, you will need it',
-                imageUrl: "resources/detectivecopy.png",
+                imageUrl: "resources/util/detectivecopy.png",
                 confirmButtonText: 'I got this!',
                 showCancelButton: false
               })

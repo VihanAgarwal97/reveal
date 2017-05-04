@@ -13,7 +13,7 @@ define(["jquery"], function($) {
             
             var currentObj = this;
             this.categoryPromise = new Promise(function(resolve, reject) {
-                $.get("resources/categories.txt", function(data) {
+                $.get("resources/util/categories.txt", function(data) {
 
                     var lines=data.split("\n");
 

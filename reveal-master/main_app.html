@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--Link to requireJS-->
+        <script src="requireJS-master/require.js" data-main="app.js"></script>
+        <!-- Link to SweetAlert, an improved alert system -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" />
+        <!-- Link to custom font -->
+        <link href="https://fonts.googleapis.com/css?family=Macondo" rel="stylesheet"/>
+        <!-- Link to our custom stylesheet -->
+        <link href="styles.css" rel="stylesheet"/>
+        <title>reveal</title>
+    </head>
+    <body>
+        <!-- A container for the entire app -->
+        <div id="screen">
+            <!-- An Input field for the user to guess the picture -->
+            <input id="guessinp" type="text" placeholder="GUESS THE PICTURE"/>
+            <!-- Hidden guess button to check user guess -->
+            <input id="guessbutton" type="button" hidden/>
+            <!-- A container for the canvas -->
+            <div id="canvas-container"></div>
+            <!-- A container for the question/answer pane -->
+            <div id="sidePane">
+                <!-- A container for the question -->
+                <div id="question"></div>
+                <!-- Containers for the answers -->
+                <div id="answer0" class="answer" ></div>
+                <div id="answer1" class="answer" ></div>
+                <div id="answer2" class="answer"></div>
+                <div id="answer3" class="answer" ></div>
+            </div>
+        </div>   
+    </body>
+</html>

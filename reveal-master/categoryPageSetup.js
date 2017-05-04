@@ -12,7 +12,7 @@ require.config({
 require(["categoryParser","Howler" ,"jquery"], function(categoryParser, Howler, $) {
    
         var sound = new Howler.Howl({
-            src: ['resources/Primavera.wav']
+            src: ['resources/sounds/Primavera.wav']
         });
         sound.play();
     
@@ -20,7 +20,7 @@ require(["categoryParser","Howler" ,"jquery"], function(categoryParser, Howler, 
     catParse.categoryPromise.then(function() {
         for(var category in catParse.categoryList) {
             var id = category.trim() + "button"; // Example ID: "ComputerSciencebutton"
-            makeCategoryButton("index.html", id, category);
+            makeCategoryButton("main_app.html", id, category);
             $(id).on("click", function() {
                 localStorage.setItem("category", category);
             });
