@@ -263,15 +263,17 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
         
         /*Defines a function for a grid square when clicked*/
         function clickEvent_grid(){
-            if(qah.isClicked) {
+            if(qah.isClicked && qah.activeGrid != undefined) {
                 qah.activeGrid.texture = new PIXI.Texture.fromImage("resources/util/quizbox150.png");
             }
-            if(questionAPI.questionList.length != 0) {
-                qah.updateQuestionPane(this);
+            
+            qah.updateQuestionPane(this);
+            
+            if(qah.activeGrid != undefined) {
+                qah.showPaneElements();
+                this.texture = new PIXI.Texture.fromImage("resources/util/selectedQuizBox150.png");
+                qah.isClicked = true;
             }
-            qah.showPaneElements();
-            this.texture = new PIXI.Texture.fromImage("resources/util/selectedQuizBox150.png");
-            qah.isClicked = true;
         }
 
         /*Variable to store the counter as a texture*/
