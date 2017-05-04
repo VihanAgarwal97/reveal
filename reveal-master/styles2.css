@@ -1,17 +1,25 @@
 *{
     font-family: 'Macondo', cursive;
 }
-
-body {
-    background: black;
-}
-
 #screen{
     display: flex;
 }
+
+body {
+    background-color: black;
+    background-image: url(resources/quizbox150.png);
+    background-repeat:  repeat-y;
+
+  
+}
+
+
 h1{
     color: firebrick;
-    font-size: 80 px; 
+    font-stretch: expanded;
+    font-size: 60px;
+    text-align:center;
+    margin-top: 300px;
 }
 p{
     color:firebrick;
@@ -25,7 +33,6 @@ p{
     text-align: center;
     display: inline-block;
     font-size: 48px;
-    margin: 4px 2px;
     border-radius: 30px;
     width: 250 px;
     transition-duration: 0.7s;
@@ -37,36 +44,20 @@ p{
     text-align: center;
     display: inline-block;
     font-size: 48px;
-    margin: 4px 2px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 150px;
+    margin-left: 550px;
     border-radius: 30px;
     width: 250 px;
     transition-duration: 0.7s;
   
 }
-.categories-list a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    border-color: red;
-}
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-.categories-list {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
+
 .startButton:hover{
     background-color: orangered;
     box-shadow: 0 5px #ffffff;
 }
-.categories-list a:hover {background-color: #f1f1f1}
 
 .show {display:block;}
 .helpButton:hover{
@@ -80,7 +71,13 @@ p{
 }
 a{
     text-align: center;
-    
     font-size: px;
     border-radius: 5px;
+    text-decoration: none;
+    color: white;
+}
+a:hover{
+    background-color: orangered;
+    box-shadow: 0 5px #ffffff;
+    border: 30px;
 }

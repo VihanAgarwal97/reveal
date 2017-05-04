@@ -13,3 +13,15 @@ bottle.jpg$BOTTLE
 guitar.jpg$GUITAR
 helicopter.jpg$HELICOPTER
 plant.jpg$PLANT
+bell.jpg$BELL
+cueBall.jpg$CUEBALL
+piano.jpg$PIANO
+spacebar.jpg$SPACEBAR
+calendar.jpg$CALENDAR
+paw.jpg$PAW
+pearl.jpg$PEARL
+lamp.jpg$LAMP
+trex.jpg$TREX
+theater.jpg$THEATER
+moon.jpg$MOON
+paris.jpg$PARIS

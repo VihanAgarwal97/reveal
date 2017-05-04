@@ -6,7 +6,6 @@ define(["sweetalert"], function(sweetalert){
             this.stage = stage;
             this.guessbox = null;
             this.boxList = boxList;
-            
             /*Checks to see if the user already correctly guessed the picture*/
             this.pictureGuessedCorrectly = false;
             
@@ -43,13 +42,16 @@ define(["sweetalert"], function(sweetalert){
             /*If the user's answer is correct, this ends the game*/
             this.handleCorrectGuess = function(boxList) {
                 this.pictureGuessedCorrectly = true;
-                swal("Nice!", "You guessed correct!", "success");
-                //this.clearStage();
             }
 
             /*If the user's answer is incorrect, this gives an indication for it.*/
             this.handleIncorrectGuess = function() {
-                swal("Oops!","You guessed wrong!","error");
+                swal({
+                  title: "WRONG!",
+                  text: "Are you really a detective?",
+                    confirmButtonText: "Of course I am! Just wait!",
+                  imageUrl: "resources/Villian2.png"
+                });
             }
 
             /*Removes all graphical elements from the app's main stage*/

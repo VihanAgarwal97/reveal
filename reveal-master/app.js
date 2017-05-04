@@ -72,6 +72,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
         /*Function that sets up the app*/
         $("document").ready(function setup(){
             questionAPI.category = category;
+            //$("#restartButton").toggle();
             
             /*Set height of sidepane to be the same as the canvas*/
             h = $("canvas").css("height");
@@ -80,6 +81,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
             /*Hide all sidepane elements*/
             qah.hidePaneElements();
             
+            //$("#restartButton").css("visibility","show");
             /*Request questions from the API*/
             var questionListPromise = questionAPI.requestData();
             
@@ -185,7 +187,8 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
         
         var sound = new Howl({
           src: ['resources/Primavera.wav'],
-            volume: .5,
+          volume: .5,
+          loop:true,
         });
 
         sound.play();
@@ -225,10 +228,23 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
             totalpoints = guesspoints + gamepoints + gridpoints;
             qah.addPointsLabel(totalpoints, true);
             clearGameAssets();
-            swal('Game Over! You Win! \n Game Points:  +' + gamepoints +"\n Bonus Time Points:  +" + guesspoints + '\n Bonus Grid Points:  +' + gridpoints + '\n Total Points:  '  + totalpoints);
-
+               // displaying points and replay button 
+            swal({
+                title: "Dare To Play Again",
+                text: ('You Win! You have bested the Riddler again, next time it will not be as easy! \n Game Points:  +' + gamepoints + "\n Bonus Time Points:  +" + guesspoints + '\n Bonus Grid Points:  +' + gridpoints + '\n Total Points:  '  + totalpoints),
+                confirmButtonText: "Yes, that was easy!",
+                imageUrl: "resources/detectivecopy.png",
+                showCancelButton: true,
+                cancelButtonText: "No, I don't want to test my luck"},
+                 //function to link to start page and categories page respectivley
+                function(isConfirm){
+                    if (isConfirm){
+                        window.location.href= 'Categories.html';
+                    }else{
+                        window.location.href = 'startpage.html';
+                    }
+            });
         }
-    
         /*Clears game images from the board*/
         function clearGameAssets() {
             qah.hidePaneElements();
@@ -243,6 +259,7 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
                     i++;
                 }
             }
+            //$("#restartButton").toggle();
         }
         
         /*Defines a function for a grid square when clicked*/

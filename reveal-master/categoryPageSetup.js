@@ -5,10 +5,16 @@ require.config({
     paths: {
         jquery: "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min",
         categoryParser: "categoryParser",
+        Howler: "https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.3/howler.min",
     }
 });
 
-require(["categoryParser", "jquery"], function(categoryParser, $) {
+require(["categoryParser","Howler" ,"jquery"], function(categoryParser, Howler, $) {
+   
+        var sound = new Howler.Howl({
+            src: ['resources/Primavera.wav']
+        });
+        sound.play();
     
     catParse = new categoryParser.CategoryParser();
     catParse.categoryPromise.then(function() {
