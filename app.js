@@ -6,7 +6,7 @@ require.config({
         questionAPI: "questionAPI",
         imgloader: "imgloader",
         Howler: "https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.3/howler.min",
-        PIXI: "http://pixijs.download/release/pixi.min",
+        PIXI: "https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min",
         qaHandler: "qaHandler",
         timer: "timer",
         sweetalert: "https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min",
