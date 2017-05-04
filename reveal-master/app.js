@@ -184,7 +184,8 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
         }
         
         var sound = new Howl({
-          src: ['resources/Primavera.wav']
+          src: ['resources/Primavera.wav'],
+            volume: .5,
         });
 
         sound.play();

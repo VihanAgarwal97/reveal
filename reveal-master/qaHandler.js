@@ -1,4 +1,4 @@
-define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, PIXI, questionAPI) 
+define(["jquery", "PIXI", "questionAPI"], function($, PIXI, questionAPI) 
 {
     return {
         QAHandler: function(stage, gState, noOfGrids) {
@@ -23,12 +23,14 @@ define(["jquery", "sweetalert", "PIXI", "questionAPI"], function($, sweetalert, 
             
             /*Correct sound indication*/
             this.correct_sound = new Howl({
-               src:['resources/correctSFX.wav'] 
+               src:['resources/correctSFX.wav'],
+                volume: 1,
             });
             
             /*Incorrect sound indication*/
             this.incorrect_sound = new Howl({
-               src:['resources/incorrectSFX.wav'] 
+               src:['resources/incorrectSFX.wav'],
+                volume: 1.5,
             });
 
             /*Updates the question on the side pane to reflect the question associated with the grid passed to it*/
