@@ -34,7 +34,7 @@ require(["Howler", "sweetalert2", "jquery"],
                 {
                     title: 'In order to make it a fair fight, here is how to play:',
                     text:'There are 16 questions for you to answer in order to reveal parts of the picture',
-                    imageUrl: 'resources/util/quizBox150.png'},
+                    imageUrl: 'resources/util/quizbox150.png'},
                 {
                     title:'Answer the Question, Reveal Part of the Pic',
                     text: "Correct answer: +300 pts Incorrect answer: -50 pts",
