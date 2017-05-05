@@ -1,11 +1,13 @@
 define(["sweetalert"], function(sweetalert){    
     /*Handles the guess functionality*/
     return {
-        GuessboxFunctionality: function(imgloader, stage, boxList) {
+        GuessboxFunctionality: function(qah, imgloader, stage, boxList) {
             this.imgloader = imgloader;
             this.stage = stage;
             this.guessbox = null;
             this.boxList = boxList;
+            this.qah = qah;
+            
             /*Checks to see if the user already correctly guessed the picture*/
             this.pictureGuessedCorrectly = false;
             
@@ -46,11 +48,14 @@ define(["sweetalert"], function(sweetalert){
             /*If the user's answer is incorrect, this gives an indication for it.*/
             this.handleIncorrectGuess = function() {
                 swal({
-                  title: "WRONG!",
+                  title: "WRONG! (-100 points)",
                   text: "Are you really a detective?",
                     confirmButtonText: "Of course I am! Just wait!",
                   imageUrl: "resources/util/Villian2.png"
                 });
+                $("#guessinp").val('');
+                qah.gamestate.addPoints(-100);
+                qah.addPointsLabel(qah.gamestate.points,true);
             }
 
         }
