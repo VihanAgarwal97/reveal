@@ -1,6 +1,6 @@
 bunny.jpg$BUNNY
 candle.jpg$CANDLE
-Mug.jpg$MUG
+Mug.jpg$CUP
 dolphin.jpg$DOLPHIN
 fork.jpg$FORK
 fox.jpg$FOX
@@ -14,14 +14,13 @@ guitar.jpg$GUITAR
 helicopter.jpg$HELICOPTER
 plant.jpg$PLANT
 bell.jpg$BELL
-cueBall.jpg$CUEBALL
 piano.jpg$PIANO
-spacebar.jpg$SPACEBAR
+spacebar.jpg$KEYBOARD
 calendar.jpg$CALENDAR
 paw.jpg$PAW
 pearl.jpg$PEARL
 lamp.jpg$LAMP
-trex.jpg$TREX
+trex.jpg$DINOSAUR
 theater.jpg$THEATER
 moon.jpg$MOON
-paris.jpg$PARIS
+paris.jpg$CITY
