@@ -67,12 +67,11 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
         var timer= new timer.Timer(stage);
         
         /*Creates a guess box functionality object*/
-        var gbFunct = new guessboxFunctionality.GuessboxFunctionality(imageloader, stage, gridSquares);
+        var gbFunct = new guessboxFunctionality.GuessboxFunctionality(qah, imageloader, stage, gridSquares);
 
         /*Function that sets up the app*/
         $("document").ready(function setup(){
             questionAPI.category = category;
-            //$("#restartButton").toggle();
             
             /*Set height of sidepane to be the same as the canvas*/
             h = $("canvas").css("height");
@@ -81,7 +80,6 @@ require(["jquery", "questionAPI", "imgloader", "PIXI", "qaHandler","timer", "gam
             /*Hide all sidepane elements*/
             qah.hidePaneElements();
             
-            //$("#restartButton").css("visibility","show");
             /*Request questions from the API*/
             var questionListPromise = questionAPI.requestData();
             
